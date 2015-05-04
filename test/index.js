@@ -4,16 +4,16 @@ var IPS    = require('../index');
 
 var ips = IPS();
 
-var defaults = {
-  "height": 100,
-  "width":  100
-  "filter": "greyscale",
-  "foreground": "ffffff",
-  "background": "999999",
-  "format": "gif",
-  "text": "Hello world",
-  category: "people"
-};
+// var defaults = {
+//   "height": 100,
+//   "width":  100,
+//   "filter": "greyscale",
+//   "foreground": "ffffff",
+//   "background": "999999",
+//   "format": "gif",
+//   "text": "Hello world",
+//   category: "people"
+// };
 
 var testData = {
   all: {
