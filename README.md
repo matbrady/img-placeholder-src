@@ -60,4 +60,10 @@ Accepts an array of image data objects and returns a string of comma seperated s
 - [placecage](http://www.placecage.com/)
 - [lorempixel](http://lorempixel.com/)
 
+## Todo
+
+- [ ] https support
+- [ ] register custom placeholder template
+- [ ] override existing templates
+
 [MIT](http://opensource.org/licenses/MIT) © [Mat Brady](https://github.com/matbrady)
