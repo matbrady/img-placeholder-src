@@ -41,6 +41,22 @@
   http://placehold.it/100x100 100w 100h, http://placehold.it/200x200 200w 200h, 
   */
   ```
+Each service supports different placeholder variations which I've tried to include. At image data object that looks contains all types of variations would look something like this.
+
+  ```
+  {
+    "height": 100,
+    "width":  100,
+    "filter": "greyscale",
+    "foreground": "ffffff",
+    "background": "999999",
+    "format": "gif",
+    "text": "Hello world",
+    "category": "people"
+  }
+  ```
+
+
 
 ## API
 
