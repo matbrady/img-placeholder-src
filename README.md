@@ -60,13 +60,29 @@ Each service supports different placeholder variations which I've tried to inclu
 
 ## API
 
-### service.src()
+### service.src(imageData, [options])
 
-Accepts an image data object containing atleast a height and width
+Accepts an image data object containing atleast a height and width. If the optional `unique` attribute is passed, the image src size will be increamented by the `unique` value. This should be the index within a list. This forces the image services to send a different image instead of sending the same image if a duplicate size is requested. For example, the output would look like: 
 
-### service.srcset()
+```
+var data = [
+  {height: 300, width: 300},
+  {height: 300, width: 300},
+  {height: 300, width: 300}
+]
+list.forEach(function(item, index) {
+  console.log( ips.placecage.srcset(data, {unique:index}) );
+}
+/*
+http://placecage.com/300/300 ...
+http://placecage.com/301/301 ...
+http://placecage.com/302/302 ...
+*/
+```
 
-Accepts an array of image data objects and returns a string of comma seperated source references and sizes. 
+### service.srcset(srcsetData, [options])
+
+Accepts an array of image data objects and returns a string of comma seperated source references and sizes. Optional `options` can be passed to the internal `src()` call. 
 
 ## Services 
 

@@ -79,23 +79,27 @@ var results = {
     category: "http://lorempixel.com/100/100/people",
     filter: "http://lorempixel.com/g/100/100",
     src: "http://lorempixel.com/100/100",
-    srcset: "http://lorempixel.com/100/100 100w 100h, http://lorempixel.com/200/200 200w 200h"
+    srcset: "http://lorempixel.com/100/100 100w 100h, http://lorempixel.com/200/200 200w 200h",
+    unqiue: "http://lorempixel.com/102/102 100w 100h, http://lorempixel.com/202/202 200w 200h"
   },
   fillmurray: {
     filter: "http://fillmurray.com/g/100/100",
     src: "http://fillmurray.com/100/100",
-    srcset: "http://fillmurray.com/100/100 100w 100h, http://fillmurray.com/200/200 200w 200h"
+    srcset: "http://fillmurray.com/100/100 100w 100h, http://fillmurray.com/200/200 200w 200h",
+    unqiue: "http://fillmurray.com/102/102 100w 100h, http://fillmurray.com/202/202 200w 200h"
   },
   placecage: {
     filter: "http://placecage.com/g/100/100",
     crazy: "http://placecage.com/c/100/100",
     src: "http://placecage.com/100/100",
-    srcset: "http://placecage.com/100/100 100w 100h, http://placecage.com/200/200 200w 200h"
+    srcset: "http://placecage.com/100/100 100w 100h, http://placecage.com/200/200 200w 200h",
+    unqiue: "http://placecage.com/102/102 100w 100h, http://placecage.com/202/202 200w 200h"
   },
   placeimg: {
     filter: "http://placeimg.com/100/100/any/greyscale",
     src: "http://placeimg.com/100/100/any",
-    srcset: "http://placeimg.com/100/100/any 100w 100h, http://placeimg.com/200/200/any 200w 200h"
+    srcset: "http://placeimg.com/100/100/any 100w 100h, http://placeimg.com/200/200/any 200w 200h",
+    unqiue: "http://placeimg.com/102/102/any 100w 100h, http://placeimg.com/202/202/any 200w 200h"
   }
 };
 
@@ -148,6 +152,10 @@ describe('#lorempixel', function() {
   it('should return a category string of "' + results.lorempixel.category  +'"', function() {
     ips.lorempixel.src(testData.all.category).should.equal(results.lorempixel.category);
   });
+
+  it('should return a unqiue size string of "' + results.lorempixel.unqiue + '"', function() {
+    ips.lorempixel.srcset(testData.all.srcset, {unique: 2}).should.equal(results.lorempixel.unqiue);
+  });
   
 });
 
@@ -167,6 +175,10 @@ describe('#fillmurray', function() {
 
   it('should return a filter string of "' + results.fillmurray.filter  +'"', function() {
     ips.fillmurray.src(testData.all.filter).should.equal(results.fillmurray.filter);
+  });
+
+  it('should return a unqiue size string of "' + results.fillmurray.unqiue + '"', function() {
+    ips.fillmurray.srcset(testData.all.srcset, {unique: 2}).should.equal(results.fillmurray.unqiue);
   });
   
 });
@@ -192,6 +204,10 @@ describe('#placecage', function() {
   it('should return a filter string of "' + results.placecage.crazy  +'"', function() {
     ips.placecage.src(testData.placecage.crazy).should.equal(results.placecage.crazy);
   });
+
+  it('should return a unqiue size string of "' + results.placecage.unqiue + '"', function() {
+    ips.placecage.srcset(testData.all.srcset, {unique: 2}).should.equal(results.placecage.unqiue);
+  });
   
 });
 
@@ -211,6 +227,10 @@ describe('#placeimg', function() {
 
   it('should return a filter string of "' + results.placeimg.filter  +'"', function() {
     ips.placeimg.src(testData.all.filter).should.equal(results.placeimg.filter);
+  });
+
+  it('should return a unqiue size string of "' + results.placeimg.unqiue + '"', function() {
+    ips.placeimg.srcset(testData.all.srcset, {unique: 2}).should.equal(results.placeimg.unqiue);
   });
   
 });

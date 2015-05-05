@@ -3,19 +3,20 @@ var nunjucks = require('nunjucks');
 var srcset   = require('srcset');
 
 var BaseService = {
-  srcset: function(data) {
+  srcset: function(data, options) {
     var _this = this;
     var sources = [];
+    var options = options || null;
 
     data.forEach(function(imageData) {
-      imageData['url'] = _this.src(imageData);
+      imageData['url'] = _this.src(imageData, options);
       sources.push(imageData);
     });
     return srcset.stringify(sources);
   }
 }
 
-var ImagePlaceholderSrc = function(config) {
+var ImagePlaceholderSrc = function(options) {
   var _this = this;
   var defaults = {
     engine: nunjucks
@@ -34,14 +35,14 @@ var ImagePlaceholderSrc = function(config) {
     fillmurray:  'http://fillmurray.com{{ "/"+filter if filter }}/{{ width }}/{{ height }}'
   };
 
-  var config = _.defaults(defaults, config);
+  var options = _.defaults(defaults, options);
 
   function createTemplate(tmplStr) {
-    if (!!config.engine.compile) {
-      return config.engine.compile(tmplStr);
+    if (!!options.engine.compile) {
+      return options.engine.compile(tmplStr);
     }
     else {
-      return config.engine.template(tmplStr);
+      return options.engine.template(tmplStr);
     }
   }
 
@@ -52,6 +53,16 @@ var ImagePlaceholderSrc = function(config) {
     else {
       return tmpl(data);
     }
+  }
+
+  // This only increases the size in the image url
+  // it dones not affect the responsive size dimensions
+  // so that the browser thinks it's the same size as its
+  // sibling images and it's swaped at the same time. 
+  function size(imageData, index) { 
+    imageData.height += index;
+    imageData.width += index;
+    return imageData;
   }
 
   var services = {
@@ -68,7 +79,7 @@ var ImagePlaceholderSrc = function(config) {
     },
 
     lorempixel: {
-      src: function(data) {
+      src: function(data, options) {
         var data = _.clone(data);
         var template = createTemplate(tmpl.lorempixel);
         // Image Modifications
@@ -82,23 +93,33 @@ var ImagePlaceholderSrc = function(config) {
               break;
           }
         }
+        // Check if the sizes should be increamented by one. 
+        if (!!options && !!options.unique) {
+          data = size(data, options.unique);
+        }
         return renderTemplate(template, data);
       }
     },
 
     placeimg: {
-      src: function(data) {
+      src: function(data, options) {
         var data = _.clone(data);
+        var template = createTemplate(tmpl.placeimg);
+
         if (!data.category) {
           data['category'] = 'any'
         }
-        var template = createTemplate(tmpl.placeimg);
+        // Check if the sizes should be increamented by one. 
+        if (!!options && !!options.unique) {
+          data = size(data, options.unique);
+        }
+
         return renderTemplate(template, data);
       }
     },
 
     placecage: {
-      src: function(data) {
+      src: function(data, options) {
         var data = _.clone(data);
         var template = createTemplate(tmpl.placecage);
         if (!!data.filter) {
@@ -111,12 +132,16 @@ var ImagePlaceholderSrc = function(config) {
               break;
           }
         }
+        // Check if the sizes should be increamented by one. 
+        if (!!options && !!options.unique) {
+          data = size(data, options.unique);
+        }
         return renderTemplate(template, data);
       }
     },
 
     fillmurray: {
-      src: function(data) {
+      src: function(data, options) {
         var data = _.clone(data);
         var template = createTemplate(tmpl.fillmurray);
         if (!!data.filter) {
@@ -125,6 +150,10 @@ var ImagePlaceholderSrc = function(config) {
               data.filter = 'g';
               break;
           }
+        }
+        // Check if the sizes should be increamented by one. 
+        if (!!options && !!options.unique) {
+          data = size(data, options.unique);
         }
         return renderTemplate(template, data);
       }
