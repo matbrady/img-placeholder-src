@@ -72,34 +72,34 @@ var results = {
     colors:  "http://placehold.it/100x100/dddddd/000000",
     format: "http://placehold.it/100x100.jpg",
     src:    "http://placehold.it/100x100",
-    srcset: 'http://placehold.it/100x100 100w 100h, http://placehold.it/200x200 200w 200h',
+    srcset: 'http://placehold.it/100x100 100w, http://placehold.it/200x200 200w',
     text:   "http://placehold.it/100x100&text=hello+world"
   },
   lorempixel: {
     category: "http://lorempixel.com/100/100/people",
     filter: "http://lorempixel.com/g/100/100",
     src: "http://lorempixel.com/100/100",
-    srcset: "http://lorempixel.com/100/100 100w 100h, http://lorempixel.com/200/200 200w 200h",
-    unqiue: "http://lorempixel.com/102/102 100w 100h, http://lorempixel.com/202/202 200w 200h"
+    srcset: "http://lorempixel.com/100/100 100w, http://lorempixel.com/200/200 200w",
+    unqiue: "http://lorempixel.com/102/102 100w, http://lorempixel.com/202/202 200w"
   },
   fillmurray: {
     filter: "http://fillmurray.com/g/100/100",
     src: "http://fillmurray.com/100/100",
-    srcset: "http://fillmurray.com/100/100 100w 100h, http://fillmurray.com/200/200 200w 200h",
-    unqiue: "http://fillmurray.com/102/102 100w 100h, http://fillmurray.com/202/202 200w 200h"
+    srcset: "http://fillmurray.com/100/100 100w, http://fillmurray.com/200/200 200w",
+    unqiue: "http://fillmurray.com/102/102 100w, http://fillmurray.com/202/202 200w"
   },
   placecage: {
     filter: "http://placecage.com/g/100/100",
     crazy: "http://placecage.com/c/100/100",
     src: "http://placecage.com/100/100",
-    srcset: "http://placecage.com/100/100 100w 100h, http://placecage.com/200/200 200w 200h",
-    unqiue: "http://placecage.com/102/102 100w 100h, http://placecage.com/202/202 200w 200h"
+    srcset: "http://placecage.com/100/100 100w, http://placecage.com/200/200 200w",
+    unqiue: "http://placecage.com/102/102 100w, http://placecage.com/202/202 200w"
   },
   placeimg: {
     filter: "http://placeimg.com/100/100/any/greyscale",
     src: "http://placeimg.com/100/100/any",
-    srcset: "http://placeimg.com/100/100/any 100w 100h, http://placeimg.com/200/200/any 200w 200h",
-    unqiue: "http://placeimg.com/102/102/any 100w 100h, http://placeimg.com/202/202/any 200w 200h"
+    srcset: "http://placeimg.com/100/100/any 100w, http://placeimg.com/200/200/any 200w",
+    unqiue: "http://placeimg.com/102/102/any 100w, http://placeimg.com/202/202/any 200w"
   }
 };
 

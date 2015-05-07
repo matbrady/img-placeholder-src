@@ -9,8 +9,8 @@ var BaseService = {
     var options = options || null;
 
     data.forEach(function(imageData) {
-      imageData['url'] = _this.src(imageData, options);
-      sources.push(imageData);
+      imageData.url = _this.src(imageData, options);
+      sources.push(_.omit(imageData, 'height'));
     });
     return srcset.stringify(sources);
   }

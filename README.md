@@ -38,7 +38,7 @@
   var srcset = ips.placeholdit.srcset(srcsetData);
   console.log(srcset);
   /*
-  http://placehold.it/100x100 100w 100h, http://placehold.it/200x200 200w 200h, 
+  http://placehold.it/100x100 100w, http://placehold.it/200x200 200w, 
   */
   ```
 Each service supports different placeholder variations which I've tried to include. At image data object that looks contains all types of variations would look something like this.
@@ -99,3 +99,7 @@ Accepts an array of image data objects and returns a string of comma seperated s
 - [ ] override existing templates
 
 [MIT](http://opensource.org/licenses/MIT) © [Mat Brady](https://github.com/matbrady)
+
+## Changelog 
+
+- removed height from srcset string output
