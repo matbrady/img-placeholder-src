@@ -106,15 +106,6 @@ var results = {
 
 describe('img-placeholder-src', function() {
 
-
-  // describe('#srcset', function() {
-
-  //   it('should have a srcset function', function() {
-  //     assert.isFunction(ips.srcset);
-  //   });
-
-  // });
-  // 
   context('general', function() {
 
     before(function(){
