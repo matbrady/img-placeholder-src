@@ -13,14 +13,37 @@ var BaseService = {
       sources.push(_.omit(imageData, 'height'));
     });
     return srcset.stringify(sources);
+  },
+  src: function(service, data, options) {
+    var data = _.clone(data);
+
+    if (!!settings.serviceOverride) {
+      console.log('override');
+    }
+    else {
+      var template = createTemplate(tmpl[this.name]);
+    }
+    data = this.prototype.modifier(data);
+    return renderTemplate(template, data);
   }
 }
 
 var ImagePlaceholderSrc = function(options) {
   var _this = this;
+  var options = options || {};
   var defaults = {
-    engine: nunjucks
+    engine: nunjucks,
+    serviceOverride: null,
+    service: 'placeholdit',
+    protocol: null
   };
+
+  // Upate protocol if it exists to 'https:' or 'http:' 
+  if (!!options.protocol) {
+    options.protocol = options.protocol + ':';
+  }
+  // Applied passed options to default settings
+  var settings = _.extend(defaults, options);
 
   /* Placeholder Services */
   /* 
@@ -28,31 +51,32 @@ var ImagePlaceholderSrc = function(options) {
     see: http://stackoverflow.com/questions/10348906/how-to-know-if-a-request-is-http-or-https-in-node-js
   */
   var tmpl = {
-    lorempixel:  'http://lorempixel.com{{ "/"+filter if filter }}/{{ width }}/{{ height }}{{ "/"+category if category }}{{ "/"+text if (text and category) }}',
-    placeholdit: 'http://placehold.it/{{ width }}x{{ height }}{{ "/"+background if background }}{{ "/"+foreground if foreground }}{{ "."+format if format }}{{ "&text="+text if text }}', //<%= '.'+format %>
-    placeimg:    'http://placeimg.com/{{ width }}/{{ height }}{{ "/"+category if category }}{{ "/"+filter if filter }}',
-    placecage:   'http://placecage.com{{ "/"+filter if filter }}/{{ width }}/{{ height }}',
-    fillmurray:  'http://fillmurray.com{{ "/"+filter if filter }}/{{ width }}/{{ height }}'
+    lorempixel:  '{{ protocol }}//lorempixel.com{{ "/"+filter if filter }}/{{ width }}/{{ height }}{{ "/"+category if category }}{{ "/"+text if (text and category) }}',
+    placeholdit: '{{ protocol }}//placehold.it/{{ width }}x{{ height }}{{ "/"+background if background }}{{ "/"+foreground if foreground }}{{ "."+format if format }}{{ "&text="+text if text }}', //<%= '.'+format %>
+    placeimg:    '{{ protocol }}//placeimg.com/{{ width }}/{{ height }}{{ "/"+category if category }}{{ "/"+filter if filter }}',
+    placecage:   '{{ protocol }}//placecage.com{{ "/"+filter if filter }}/{{ width }}/{{ height }}',
+    fillmurray:  '{{ protocol }}//fillmurray.com{{ "/"+filter if filter }}/{{ width }}/{{ height }}'
   };
 
-  // Applied passed options to default settings
-  var options = _.defaults(defaults, options);
-
   function createTemplate(tmplStr) {
-    if (!!options.engine.compile) {
-      return options.engine.compile(tmplStr);
+    if (!!settings.engine.compile) {
+      return settings.engine.compile(tmplStr);
     }
     else {
-      return options.engine.template(tmplStr);
+      return settings.engine.template(tmplStr);
     }
   }
 
   function renderTemplate(tmpl, data) {
+    var newData = _.clone(data);
+
+    newData.protocol = settings.protocol;
+
     if (!!tmpl.render) {
-      return tmpl.render(data);
+      return tmpl.render(newData);
     }
     else {
-      return tmpl(data);
+      return tmpl(newData);
     }
   }
 
@@ -69,21 +93,18 @@ var ImagePlaceholderSrc = function(options) {
   var services = {
 
     placeholdit: {
-      src: function(data) {
-        var data = _.clone(data);
-        var template = createTemplate(tmpl.placeholdit);
+      name: 'placeholdit',
+      modifier: function(data, options) {
         if (!!data.text) {
           data['text'] = data.text.replace(" ", "+");
         }
-        return renderTemplate(template, data);
+        return data;
       }
     },
 
     lorempixel: {
-      src: function(data, options) {
-        var data = _.clone(data);
-        var template = createTemplate(tmpl.lorempixel);
-        // Image Modifications
+      name: 'lorempixel',
+      modifier: function(data, options) {
         if (!!data.text) {
           data['text'] = data.text.replace(" ", "-");
         }
@@ -98,15 +119,13 @@ var ImagePlaceholderSrc = function(options) {
         if (!!options && !!options.unique) {
           data = size(data, options.unique);
         }
-        return renderTemplate(template, data);
+        return data;
       }
     },
 
     placeimg: {
-      src: function(data, options) {
-        var data = _.clone(data);
-        var template = createTemplate(tmpl.placeimg);
-
+      name: 'placeimg',
+      modifier: function(data, options) {
         if (!data.category) {
           data['category'] = 'any'
         }
@@ -114,15 +133,13 @@ var ImagePlaceholderSrc = function(options) {
         if (!!options && !!options.unique) {
           data = size(data, options.unique);
         }
-
-        return renderTemplate(template, data);
+        return data;
       }
     },
 
     placecage: {
-      src: function(data, options) {
-        var data = _.clone(data);
-        var template = createTemplate(tmpl.placecage);
+      name: 'placecage',
+      modifier: function(data, options) {
         if (!!data.filter) {
           switch(data.filter) {
             case 'greyscale':
@@ -137,14 +154,13 @@ var ImagePlaceholderSrc = function(options) {
         if (!!options && !!options.unique) {
           data = size(data, options.unique);
         }
-        return renderTemplate(template, data);
+        return data;
       }
     },
 
     fillmurray: {
-      src: function(data, options) {
-        var data = _.clone(data);
-        var template = createTemplate(tmpl.fillmurray);
+      name: 'fillmurray',
+      modifier: function(data, options) {
         if (!!data.filter) {
           switch(data.filter) {
             case 'greyscale':
@@ -156,16 +172,64 @@ var ImagePlaceholderSrc = function(options) {
         if (!!options && !!options.unique) {
           data = size(data, options.unique);
         }
-        return renderTemplate(template, data);
+        return data;
       }
     }
-  }
+  };
+
+  var exports = {
+    srcset: function(data, service, options) {
+      var _this = this;
+      var sources = [];
+      var options = options || null;
+
+      data.forEach(function(imageData) {
+        imageData.url = _this.src(imageData, service, options);
+        sources.push(_.omit(imageData, 'height'));
+      });
+      return srcset.stringify(sources);
+    },
+
+    src: function(data, service, options) { // service:string, options:object
+      var config;
+      var template;
+      var serviceObj;
+      var data = _.clone(data);
+
+      if (typeof service === 'undefined') {
+        service = defaults.service;
+      }
+      if (!!service && typeof service !== 'string') {
+        config = service; 
+        service = defaults.service;
+      }
+
+
+      if (!!settings.serviceOverride) {
+        serviceObj = services[settings.serviceOverride];
+        template = createTemplate(tmpl[settings.serviceOverride]);
+      }
+      else {
+        serviceObj = services[service];
+        template = createTemplate(tmpl[serviceObj.name]);
+      }
+      data = serviceObj.modifier(data, options);
+      return renderTemplate(template, data);
+    }
+  };
 
   _.each(services, function(service, key, list) {
-    _.extend(services[key], BaseService);
+    exports[key] = {
+      srcset: function(data, options) {
+        return exports.srcset(data, key, options);
+      },
+      src: function(data, options) {
+        return exports.src(data, key, options);
+      }
+    }
   });
 
-  return services;
+  return exports;
 }; 
 
 module.exports = ImagePlaceholderSrc;
