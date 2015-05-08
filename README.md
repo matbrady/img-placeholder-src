@@ -2,6 +2,8 @@
 
 > helper for using strcutured data to populate various image placeholder sources. 
 
+**!! IMPORTANT:** This module is actively in development and you should expect breaking changes in the future versions
+
 ## Table of Contents
 
 - [Install](#install)
