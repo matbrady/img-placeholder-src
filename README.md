@@ -1,6 +1,15 @@
 # img-placeholder-src
 
-> helper for using strcutured data to populate various image placeholder sources.
+> helper for using strcutured data to populate various image placeholder sources. 
+
+## Table of Contents
+
+- [Install](#install)
+- [Usage](#usage)
+- [API](#api)
+- [Image Service](#services)
+- [Why?](#why)
+- [Changelog](#changelog)
 
 ## Install 
 
@@ -92,11 +101,18 @@ Accepts an array of image data objects and returns a string of comma seperated s
 - [placecage](http://www.placecage.com/)
 - [lorempixel](http://lorempixel.com/)
 
+## Why
+
+Populating actual content for a front-end that will later be integrated into a CMS is a waste of time. Placeholder content is more efficient and there are several image services out there that you can use. My default has always been [PLACEHOLD.IT](http://placehold.it/) because the file sizes are small, the dimensions are displayed which is helpful for integrators, the image can be customized in a bunch of different ways, and there's no awkward conversation with the client about why [Bill Murray](http://www.fillmurray.com/) is all over their site. The biggest problem with PLACEHOLD.IT is that the image files are so small. They don't accurately represent the final site with actual image content and weight. 
+
+As developers we should always be testing and optimizing our code to be as perfomant and accessible as possible. To do that we need more realistic placeholder content. So we need to be able to test with actual images but use simpler placeholder content for client reviews. This would require manually updating image sources which could be very tedious and time consuming, especially if you are using [responsive image](https://css-tricks.com/video-screencasts/133-figuring-responsive-images/) techniques. Instead, this module makes it possible to define placeholder image attributes like `height`, `width` and generate the service image `src` and `srcset` attribute on demand. 
+
 ## Todo
 
 - [ ] https support
 - [ ] register custom placeholder template
 - [ ] override existing templates
+- [ ] add global service override function
 
 [MIT](http://opensource.org/licenses/MIT) © [Mat Brady](https://github.com/matbrady)
 

@@ -35,6 +35,7 @@ var ImagePlaceholderSrc = function(options) {
     fillmurray:  'http://fillmurray.com{{ "/"+filter if filter }}/{{ width }}/{{ height }}'
   };
 
+  // Applied passed options to default settings
   var options = _.defaults(defaults, options);
 
   function createTemplate(tmplStr) {
