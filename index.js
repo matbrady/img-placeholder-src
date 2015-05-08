@@ -19,11 +19,10 @@ var ImagePlaceholderSrc = function(options) {
   // Applied passed options to default settings
   var settings = _.extend(defaults, options);
 
-  /* Placeholder Services */
-  /* 
-    TODO: Override http vs https - note some services may not provide it 
-    see: http://stackoverflow.com/questions/10348906/how-to-know-if-a-request-is-http-or-https-in-node-js
-  */
+  /**
+   * Src string nunjucks templates
+   * @type {Object}
+   */
   var tmpl = {
     lorempixel:  '{{ protocol }}//lorempixel.com{{ "/"+filter if filter }}/{{ width }}/{{ height }}{{ "/"+category if category }}{{ "/"+text if (text and category) }}',
     placeholdit: '{{ protocol }}//placehold.it/{{ width }}x{{ height }}{{ "/"+background if background }}{{ "/"+foreground if foreground }}{{ "."+format if format }}{{ "&text="+text if text }}', //<%= '.'+format %>
@@ -41,6 +40,12 @@ var ImagePlaceholderSrc = function(options) {
     }
   }
 
+  /**
+   * Render image data into template string
+   * @param  {object} tmpl for data to be rendered to
+   * @param  {object} data from image
+   * @return {string}      src string rendered from the data
+   */
   function renderTemplate(tmpl, data) {
     var newData = _.clone(data);
     newData.protocol = settings.protocol;
