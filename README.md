@@ -131,13 +131,16 @@ As developers we should always be testing and optimizing our code to be as perfo
 
 ## Todo
 
-- [ ] https support
+- [X] https support
 - [ ] register custom placeholder template
 - [ ] override existing templates
-- [ ] add global service override function
+- [X] add global service override function
 
 [MIT](http://opensource.org/licenses/MIT) © [Mat Brady](https://github.com/matbrady)
 
 ## Changelog 
 
 - removed height from srcset string output
+- added root `src` and `srcset` functions
+- added serviceOverride option
+- added http protocol override option
