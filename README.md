@@ -27,7 +27,7 @@
     width: 100
   };
 
-  var src = ips.placeholdit.src(imageData);
+  var src = ips.src(imageData, 'placeholdit');
   console.log(src);
   /*
   http://placehold.it/100x100
@@ -44,13 +44,13 @@
     }
   ];
 
-  var srcset = ips.placeholdit.srcset(srcsetData);
+  var srcset = ips.srcset(srcsetData, 'placeholdit');
   console.log(srcset);
   /*
   http://placehold.it/100x100 100w, http://placehold.it/200x200 200w, 
   */
   ```
-Each service supports different placeholder variations which I've tried to include. At image data object that looks contains all types of variations would look something like this.
+Each service supports different placeholder variations which I've tried to include. An image data object that looks contains all types of variations would look something like this.
 
   ```
   {
@@ -69,7 +69,7 @@ Each service supports different placeholder variations which I've tried to inclu
 
 ## API
 
-### service.src(imageData, [options])
+### src(imageData, [service], [options])
 
 Accepts an image data object containing atleast a height and width. If the optional `unique` attribute is passed, the image src size will be increamented by the `unique` value. This should be the index within a list. This forces the image services to send a different image instead of sending the same image if a duplicate size is requested. For example, the output would look like: 
 
@@ -80,7 +80,7 @@ var data = [
   {height: 300, width: 300}
 ]
 list.forEach(function(item, index) {
-  console.log( ips.placecage.srcset(data, {unique:index}) );
+  console.log( ips.srcset(data, 'placecage', {unique:index}) );
 }
 /*
 http://placecage.com/300/300 ...
@@ -89,9 +89,31 @@ http://placecage.com/302/302 ...
 */
 ```
 
-### service.srcset(srcsetData, [options])
+### srcset(srcsetData, [service], [options])
 
 Accepts an array of image data objects and returns a string of comma seperated source references and sizes. Optional `options` can be passed to the internal `src()` call. 
+
+## API - Services 
+
+There are shorthand functions for each service. Although, I would recommend to use the base `src` or `srcset` functions. **Why?** In a application you could conditionally override every placeholder src by setting a configuration varaible. For example:
+
+```
+var serviceOverride = 'fillmurray';
+var ips = require('img-placeholder-src')({
+  serviceOverride: 'fillmurray'
+});
+```
+
+```
+<img src="{{ ips.src(data, service('placeholdit')) }}"/>
+```
+
+If `serviceOverride` is set, all image source would be replaced with `fillmurray` sources rather than `placeholdit`. This allows for quickly adding 
+
+### src(imageData, [options])
+
+### srcset(imageData, [options])
+
 
 ## Services 
 
