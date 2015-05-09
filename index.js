@@ -2,6 +2,11 @@ var _        = require('underscore');
 var nunjucks = require('nunjucks');
 var srcset   = require('srcset');
 
+/**
+ * Contructor function for creating an Image Placeholder Src object
+ * @param  {object} options for overriding defaults
+ * @return {object}         Image Placeholder Src object
+ */
 var ImagePlaceholderSrc = function(options) {
   var _this = this;
   var options = options || {};
@@ -25,12 +30,17 @@ var ImagePlaceholderSrc = function(options) {
    */
   var tmpl = {
     lorempixel:  '{{ protocol }}//lorempixel.com{{ "/"+filter if filter }}/{{ width }}/{{ height }}{{ "/"+category if category }}{{ "/"+text if (text and category) }}',
-    placeholdit: '{{ protocol }}//placehold.it/{{ width }}x{{ height }}{{ "/"+background if background }}{{ "/"+foreground if foreground }}{{ "."+format if format }}{{ "&text="+text if text }}', //<%= '.'+format %>
+    placeholdit: '{{ protocol }}//placehold.it/{{ width }}x{{ height }}{{ "/"+background if background }}{{ "/"+foreground if foreground }}{{ "."+format if format }}{{ "&text="+text if text }}',
     placeimg:    '{{ protocol }}//placeimg.com/{{ width }}/{{ height }}{{ "/"+category if category }}{{ "/"+filter if filter }}',
     placecage:   '{{ protocol }}//placecage.com{{ "/"+filter if filter }}/{{ width }}/{{ height }}',
     fillmurray:  '{{ protocol }}//fillmurray.com{{ "/"+filter if filter }}/{{ width }}/{{ height }}'
   };
 
+  /**
+   * Create template using default or defined engine
+   * @param  {string} tmplStr src url template string
+   * @return {object}         template for rendering data
+   */
   function createTemplate(tmplStr) {
     if (!!settings.engine.compile) {
       return settings.engine.compile(tmplStr);
