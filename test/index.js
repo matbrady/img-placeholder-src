@@ -1,5 +1,6 @@
-var should = require('chai').should();
+var _      = require('underscore');
 var assert = require('chai').assert;
+var should = require('chai').should();
 var IPS    = require('../index');
 
 // var defaults = {
@@ -442,6 +443,27 @@ describe('img-placeholder-src', function() {
       ips.placeimg.srcset(testData.all.srcset, {unique: 2}).should.equal(results.placeimg.unqiue);
     });
     
+  });
+
+  context('options', function() {
+
+    before(function(){
+      ips = IPS({
+        engine: _,
+        tmpl: {
+          placeholdit: "<%= protocol %>//placehold.it/<%= width %>x<%= height %>"
+        }
+      });
+    });
+
+    after(function() {
+      ips = null;
+    });
+
+    it('should render using an alternative template engine', function() {
+      ips.src(testData.all.src).should.equal(results.placeholdit.src);
+    });
+
   });
 
 });

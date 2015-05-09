@@ -14,7 +14,14 @@ var ImagePlaceholderSrc = function(options) {
     engine: nunjucks,
     serviceOverride: null,
     service: 'placeholdit',
-    protocol: null
+    protocol: null,
+    tmpl: {
+      lorempixel:  '{{ protocol }}//lorempixel.com{{ "/"+filter if filter }}/{{ width }}/{{ height }}{{ "/"+category if category }}{{ "/"+text if (text and category) }}',
+      placeholdit: '{{ protocol }}//placehold.it/{{ width }}x{{ height }}{{ "/"+background if background }}{{ "/"+foreground if foreground }}{{ "."+format if format }}{{ "&text="+text if text }}',
+      placeimg:    '{{ protocol }}//placeimg.com/{{ width }}/{{ height }}{{ "/"+category if category }}{{ "/"+filter if filter }}',
+      placecage:   '{{ protocol }}//placecage.com{{ "/"+filter if filter }}/{{ width }}/{{ height }}',
+      fillmurray:  '{{ protocol }}//fillmurray.com{{ "/"+filter if filter }}/{{ width }}/{{ height }}'
+    }
   };
 
   // Upate protocol if it exists to 'https:' or 'http:' 
@@ -23,18 +30,6 @@ var ImagePlaceholderSrc = function(options) {
   }
   // Applied passed options to default settings
   var settings = _.extend(defaults, options);
-
-  /**
-   * Src string nunjucks templates
-   * @type {Object}
-   */
-  var tmpl = {
-    lorempixel:  '{{ protocol }}//lorempixel.com{{ "/"+filter if filter }}/{{ width }}/{{ height }}{{ "/"+category if category }}{{ "/"+text if (text and category) }}',
-    placeholdit: '{{ protocol }}//placehold.it/{{ width }}x{{ height }}{{ "/"+background if background }}{{ "/"+foreground if foreground }}{{ "."+format if format }}{{ "&text="+text if text }}',
-    placeimg:    '{{ protocol }}//placeimg.com/{{ width }}/{{ height }}{{ "/"+category if category }}{{ "/"+filter if filter }}',
-    placecage:   '{{ protocol }}//placecage.com{{ "/"+filter if filter }}/{{ width }}/{{ height }}',
-    fillmurray:  '{{ protocol }}//fillmurray.com{{ "/"+filter if filter }}/{{ width }}/{{ height }}'
-  };
 
   /**
    * Create template using default or defined engine
@@ -241,13 +236,13 @@ var ImagePlaceholderSrc = function(options) {
       if (!!settings.serviceOverride) {
         serviceObj = services[settings.serviceOverride];
         // Create the template
-        template = createTemplate(tmpl[settings.serviceOverride]);
+        template = createTemplate(settings.tmpl[settings.serviceOverride]);
       }
       // ELSE set the service to the passed `service` variable
       else {
         serviceObj = services[service];
         // Create the template
-        template = createTemplate(tmpl[serviceObj.name]);
+        template = createTemplate(settings.tmpl[serviceObj.name]);
       }
 
       // Apply specific service data modifiers

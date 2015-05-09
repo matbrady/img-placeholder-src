@@ -107,15 +107,14 @@ var ips = require('img-placeholder-src')({
 ```
 
 ```
-<img src="{{ ips.src(data, service('placeholdit')) }}"/>
+<img src="{{ ips.src(data, 'placeholdit') }}"/>
 ```
 
-If `serviceOverride` is set, all image source would be replaced with `fillmurray` sources rather than `placeholdit`. This allows for quickly adding 
+If `serviceOverride` is set, all image source would be replaced with `fillmurray` sources rather than `placeholdit`. This allows for quickly changing image sources. 
 
 ### src(imageData, [options])
 
 ### srcset(imageData, [options])
-
 
 ## Services 
 
