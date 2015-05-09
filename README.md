@@ -9,65 +9,63 @@
 - [Install](#install)
 - [Usage](#usage)
 - [API](#api)
-- [Image Service](#services)
+- [Placeholder Image Services](#services)
 - [Why?](#why)
 - [Changelog](#changelog)
 
 ## Install 
 
-  ```
-  npm install img-placeholder-src --save
-  ```
+```
+npm install img-placeholder-src --save
+```
 
 ## Usage
 
-  ```
-  var ips = require('img-placeholder-src')();
+```
+var ips = require('img-placeholder-src')();
 
-  var imageData = {
+var imageData = {
+  height: 100,
+  width: 100
+};
+
+var src = ips.src(imageData, 'placeholdit');
+console.log(src);
+/*
+http://placehold.it/100x100
+*/
+
+var srcsetData = [
+  {
     height: 100,
     width: 100
-  };
-
-  var src = ips.src(imageData, 'placeholdit');
-  console.log(src);
-  /*
-  http://placehold.it/100x100
-  */
-
-  var srcsetData = [
-    {
-      height: 100,
-      width: 100
-    },
-    {
-      height: 200,
-      width: 200
-    }
-  ];
-
-  var srcset = ips.srcset(srcsetData, 'placeholdit');
-  console.log(srcset);
-  /*
-  http://placehold.it/100x100 100w, http://placehold.it/200x200 200w, 
-  */
-  ```
-Each service supports different placeholder variations which I've tried to include. An image data object that looks contains all types of variations would look something like this.
-
-  ```
+  },
   {
-    "height": 100,
-    "width":  100,
-    "filter": "greyscale",
-    "foreground": "ffffff",
-    "background": "999999",
-    "format": "gif",
-    "text": "Hello world",
-    "category": "people"
+    height: 200,
+    width: 200
   }
-  ```
+];
 
+var srcset = ips.srcset(srcsetData, 'placeholdit');
+console.log(srcset);
+/*
+http://placehold.it/100x100 100w, http://placehold.it/200x200 200w, 
+*/
+```
+Each service supports different placeholder variations which I've tried to include. An image data object that contains all types of image variations would look something like this.
 
+```
+{
+  "height": 100,
+  "width":  100,
+  "filter": "greyscale",
+  "foreground": "ffffff",
+  "background": "999999",
+  "format": "gif",
+  "text": "Hello world",
+  "category": "people"
+}
+```
 
 ## API
 
