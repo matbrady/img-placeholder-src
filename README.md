@@ -100,7 +100,7 @@ Registers a new image service function.
 Attribute     | Options     | Description
 ---           | ---         | ---
 `name`        | *string*    | Name of registered placeholder service
-`template`    | *string*    | Template for image data to be rendered to. Default to nunjucks
+`template`    | *string*    | Template for image data to be rendered to. Default to [nunjucks](https://mozilla.github.io/nunjucks/templating.html)
 `modifier`    | *function*  | *Optional.* Additional logic to modify data passed to the image template. Accepts a data object and **must:** return the modifed data object.
 
 ## API - Services 
