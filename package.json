@@ -6,6 +6,10 @@
   "scripts": {
     "test": "make test"
   },
+  "repository" :{ 
+    "type" : "git", 
+    "url" : "https://github.com/matbrady/img-placeholder-src.git"
+  },
   "keywords": [
     "img",
     "image",
