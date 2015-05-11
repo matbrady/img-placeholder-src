@@ -1,6 +1,6 @@
 {
   "name": "img-placeholder-src",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Create placeholder image src for various services",
   "main": "index.js",
   "scripts": {
