@@ -223,12 +223,23 @@ var ImagePlaceholderSrc = function(options) {
     srcset: function(data, service, options) {
       var _this = this;
       var sources = [];
-      var options = options || null;
+      var config = options || null;
+
+      // Set default service if it is not defined
+      if (typeof service === 'undefined') {
+        service = defaults.service;
+      }
+      // If `service` contains an object set the value to `config`
+      // and set the service to the default service
+      if (!!service && typeof service !== 'string') {
+        config = service; 
+        service = defaults.service;
+      }
 
       // Loop through each image data object and generate the
       // image src attribute string to create the image url
       data.forEach(function(imageData) {
-        imageData.url = _this.src(imageData, service, options);
+        imageData.url = _this.src(imageData, service, config);
         // collect all the image data while omitting the height
         // height param doesn't seem to be support by responsive image
         // ex: 'http://placehold.it/400x400 400w 400h' 
