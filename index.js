@@ -2,6 +2,37 @@ var _        = require('underscore');
 var nunjucks = require('nunjucks');
 var srcset   = require('srcset');
 
+
+var BaseService = function(name, root) {
+
+  if ( !name || !root) {
+    throw new Error('Service requires a name and a parent object to reference');
+  }
+  return {
+    name: name,
+    /**
+     * Generate service specific placeholder image `srcset` value string
+     * @param  {array}  data    array of image data objects
+     * @param  {object} options to be passed to the service's src function
+     * @return {string}         image `srcset` value string
+     */
+    srcset: function(data, options) {
+      return root.srcset(data, name, options);
+    },
+    /**
+     * Service specific src function
+     * @param  {object} data    image src data 
+     * @param  {object} options to modify the data that populates the src string
+     * @return {string}         image `src` value string
+     */
+    src: function(data, options) {
+      return root.src(data, name, options);
+    },
+    /* placeholder for adding new services */
+    modifier: function() {}
+  }
+};
+
 /**
  * Contructor function for creating an Image Placeholder Src object
  * @param  {object} options for overriding defaults
@@ -53,7 +84,7 @@ var ImagePlaceholderSrc = function(options) {
    */
   function renderTemplate(tmpl, data) {
     var newData = _.clone(data);
-    newData.protocol = settings.protocol;
+    newData['protocol'] = settings.protocol;
 
     if (!!tmpl.render) {
       return tmpl.render(newData);
@@ -219,6 +250,7 @@ var ImagePlaceholderSrc = function(options) {
       var config;
       var template;
       var serviceObj;
+      var template;
       var data = _.clone(data);
 
       // Set default service if it is not defined
@@ -249,6 +281,15 @@ var ImagePlaceholderSrc = function(options) {
       data = serviceObj.modifier(data, options);
       // Return the rendered template
       return renderTemplate(template, data);
+    },
+
+    register: function(serviceData) {
+      services[serviceData.name] = {
+        name: serviceData.name,
+        modifier: serviceData.modifier || {}
+      };
+      this[serviceData.name] = new BaseService(serviceData.name, this);
+      settings.tmpl[serviceData.name] = serviceData.template;
     }
   };
 
@@ -257,28 +298,7 @@ var ImagePlaceholderSrc = function(options) {
    * @return {null}       modifies `export`, nothing returned
    */
   _.each(services, function(service, key, list) {
-    exports[key] = {
-      /**
-       * Generate service specific placeholder image `srcset` value string
-       * @param  {array}  data    array of image data objects
-       * @param  {object} options to be passed to the service's src function
-       * @return {string}         image `srcset` value string
-       */
-      srcset: function(data, options) {
-        return exports.srcset(data, key, options);
-      },
-      /**
-       * Service specific src function
-       * @param  {object} data    image src data 
-       * @param  {object} options to modify the data that populates the src string
-       * @return {string}         image `src` value string
-       */
-      src: function(data, options) {
-        return exports.src(data, key, options);
-      },
-      /* placeholder for adding new services */
-      modifier: function() {}
-    }
+    exports[key] = new BaseService(key, exports);
   });
 
   return exports;

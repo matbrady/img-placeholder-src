@@ -102,6 +102,9 @@ var results = {
     src: "//placeimg.com/100/100/any",
     srcset: "//placeimg.com/100/100/any 100w, //placeimg.com/200/200/any 200w",
     unqiue: "//placeimg.com/102/102/any 100w, //placeimg.com/202/202/any 200w"
+  },
+  placekitten: {
+    src: "//placekitten.com/100/100"
   }
 };
 
@@ -123,6 +126,10 @@ describe('img-placeholder-src', function() {
 
     it('should have a src function', function() {
       assert.isFunction(ips.src);
+    });
+
+    it('should have a register function', function() {
+      assert.isFunction(ips.register);
     });
 
   });
@@ -445,7 +452,7 @@ describe('img-placeholder-src', function() {
     
   });
 
-  context('options', function() {
+  context('engine', function() {
 
     before(function(){
       ips = IPS({
@@ -462,6 +469,30 @@ describe('img-placeholder-src', function() {
 
     it('should render using an alternative template engine', function() {
       ips.src(testData.all.src).should.equal(results.placeholdit.src);
+    });
+
+  });
+
+  describe('custom serivce', function() {
+
+    before(function(){
+      ips = IPS();
+
+      ips.register({
+        name: 'placekitten',
+        template: '{{ protocol }}//placekitten.com{{ "/"+filter if filter }}/{{ width }}/{{ height }}',
+        modifier: function(data) {
+          return data;
+        }
+      });
+    });
+
+    after(function() {
+      ips = null;
+    });
+
+    it('should render using newly registered placeholder service: ' + results.placekitten.src, function() {
+      ips.src(testData.all.src, 'placekitten').should.equal(results.placekitten.src);
     });
 
   });

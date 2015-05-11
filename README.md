@@ -52,20 +52,20 @@ console.log(srcset);
 http://placehold.it/100x100 100w, http://placehold.it/200x200 200w, 
 */
 ```
-Each service supports different placeholder variations which I've tried to include. An image data object that contains all types of image variations would look something like this.
+Each service supports different placeholder variations which I've tried to include. An image data object that contains all types of image variations could include the following attributes.
 
-```
-{
-  "height": 100,
-  "width":  100,
-  "filter": "greyscale",
-  "foreground": "ffffff",
-  "background": "999999",
-  "format": "gif",
-  "text": "Hello world",
-  "category": "people"
-}
-```
+
+Attribute     | Options     | Description
+---           | ---         | ---
+`width`       | *integer*   | Width of the image.
+`height`      | *integer*   | Height of the image.
+`filter`      | *string*    | *Optional.* Image filter provided by service.
+`foreground`  | *string*    | *Optional.* Image foreground/text color
+`background`  | *string*    | *Optional.* Image background color
+`format`      | *string*    | *Optional.* Image format (fig, jpeg, jpg)
+`text`        | *string*    | *Optional.* Text displayed in the image
+`category`    | *string*    | *Optional.* Image category provided by service
+
 
 ## API
 
@@ -92,6 +92,16 @@ http://placecage.com/302/302 ...
 ### srcset(srcsetData, [service], [options])
 
 Accepts an array of image data objects and returns a string of comma seperated source references and sizes. Optional `options` can be passed to the internal `src()` call. 
+
+### register(serviceData)
+
+Registers a new image service function.  
+
+Attribute     | Options     | Description
+---           | ---         | ---
+`name`        | *string*    | Name of registered placeholder service
+`template`    | *string*    | Template for image data to be rendered to. Default to nunjucks
+`modifier`    | *function*  | *Optional.* Additional logic to modify data passed to the image template. Accepts a data object and **must:** return the modifed data object.
 
 ## API - Services 
 
@@ -134,6 +144,7 @@ As developers we should always be testing and optimizing our code to be as perfo
 - [ ] register custom placeholder template
 - [ ] override existing templates
 - [X] add global service override function
+- [ ] support increamenting source size for custom registered services 
 
 [MIT](http://opensource.org/licenses/MIT) © [Mat Brady](https://github.com/matbrady)
 
