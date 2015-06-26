@@ -6,8 +6,8 @@
   "scripts": {
     "test": "make test"
   },
-  "repository" :{ 
-    "type" : "git", 
+  "repository" :{
+    "type" : "git",
     "url" : "https://github.com/matbrady/img-placeholder-src.git"
   },
   "keywords": [
@@ -18,7 +18,8 @@
     "fillmurray",
     "placecage",
     "placeimg",
-    "porempixel"
+    "lorempixel",
+    "responsive"
   ],
   "author": "Mat Brady",
   "licenses": [
