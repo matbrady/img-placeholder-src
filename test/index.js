@@ -33,9 +33,9 @@ var testData = {
       width: 100
     },
     format: {
-      height: 100, 
-      width: 100, 
-      format: 'jpg' 
+      height: 100,
+      width: 100,
+      format: 'jpg'
     },
     src: {
       height: 100,
@@ -104,7 +104,8 @@ var results = {
     unqiue: "//placeimg.com/102/102/any 100w, //placeimg.com/202/202/any 200w"
   },
   placekitten: {
-    src: "//placekitten.com/100/100"
+    src: "//placekitten.com/100/100",
+    unqiue: "//placekitten.com/102/102 100w, //placekitten.com/202/202 200w"
   }
 };
 
@@ -337,7 +338,7 @@ describe('img-placeholder-src', function() {
     it('should generate a srcset with unique dimensions: ' + results.lorempixel.unqiue, function() {
       ips.lorempixel.srcset(testData.all.srcset, {unique: 2}).should.equal(results.lorempixel.unqiue);
     });
-    
+
   });
 
   describe('#fillmurray', function() {
@@ -373,7 +374,7 @@ describe('img-placeholder-src', function() {
     it('should generate a srcset with unique dimensions: ' + results.fillmurray.unqiue, function() {
       ips.fillmurray.srcset(testData.all.srcset, {unique: 2}).should.equal(results.fillmurray.unqiue);
     });
-    
+
   });
 
   describe('#placecage', function() {
@@ -449,7 +450,7 @@ describe('img-placeholder-src', function() {
     it('should generate a srcset with unique dimensions: ' + results.placeimg.unqiue, function() {
       ips.placeimg.srcset(testData.all.srcset, {unique: 2}).should.equal(results.placeimg.unqiue);
     });
-    
+
   });
 
   context('engine', function() {
@@ -493,6 +494,10 @@ describe('img-placeholder-src', function() {
 
     it('should render using newly registered placeholder service: ' + results.placekitten.src, function() {
       ips.src(testData.all.src, 'placekitten').should.equal(results.placekitten.src);
+    });
+
+    it('should generate a srcset with unique dimensions: ' + results.placeimg.unqiue, function() {
+      ips.placekitten.srcset(testData.all.srcset, {unique: 2}).should.equal(results.placekitten.unqiue);
     });
 
   });

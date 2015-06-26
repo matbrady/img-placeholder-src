@@ -101,6 +101,16 @@ Attribute     | Options     | Description
 `template`    | *string*    | Template for image data to be rendered to. Default to [nunjucks](https://mozilla.github.io/nunjucks/templating.html)
 `modifier`    | *function*  | *Optional.* Additional logic to modify data passed to the image template. Accepts a data object and **must:** return the modifed data object.
 
+```
+ips.register({
+  name: 'placekitten',
+  template: '{{ protocol }}//placekitten.com{{ "/"+filter if filter }}/{{ width }}/{{ height }}',
+  modifier: function(data) {
+    return data;
+  }
+});
+```
+
 ## API - Services
 
 There are shorthand functions for each service. Although, I would recommend to use the base `src` or `srcset` functions. **Why?** In a application you could conditionally override every placeholder src by setting a configuration varaible. For example:
@@ -139,10 +149,10 @@ As developers, we should always be testing and optimizing our code to be as perf
 ## Todo
 
 - [X] https support
-- [ ] register custom placeholder template
+- [ ] register custom placeholder template for existing services
 - [ ] override existing templates
 - [X] add global service override function
-- [ ] support incrementing source size for custom registered services
+- [X] support incrementing source size for custom registered services
 
 [MIT](http://opensource.org/licenses/MIT) © [Mat Brady](https://github.com/matbrady)
 

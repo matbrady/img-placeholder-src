@@ -2,6 +2,23 @@ var _        = require('underscore');
 var nunjucks = require('nunjucks');
 var srcset   = require('srcset');
 
+// This only increases the size in the image url
+// it dones not affect the responsive size dimensions
+// so that the browser thinks it's the same size as its
+// sibling images and it's swaped at the same time.
+function size(imageData, index) {
+  imageData.height += index;
+  imageData.width += index;
+  return imageData;
+}
+
+function baseModifier(data, options) {
+  // Check if the sizes should be increamented by one.
+  if (!!options && !!options.unique) {
+    data = size(data, options.unique);
+  }
+  return data;
+}
 
 var BaseService = function(name, root) {
 
@@ -21,7 +38,7 @@ var BaseService = function(name, root) {
     },
     /**
      * Service specific src function
-     * @param  {object} data    image src data 
+     * @param  {object} data    image src data
      * @param  {object} options to modify the data that populates the src string
      * @return {string}         image `src` value string
      */
@@ -55,7 +72,7 @@ var ImagePlaceholderSrc = function(options) {
     }
   };
 
-  // Upate protocol if it exists to 'https:' or 'http:' 
+  // Upate protocol if it exists to 'https:' or 'http:'
   if (!!options.protocol) {
     options.protocol = options.protocol + ':';
   }
@@ -94,16 +111,6 @@ var ImagePlaceholderSrc = function(options) {
     }
   }
 
-  // This only increases the size in the image url
-  // it dones not affect the responsive size dimensions
-  // so that the browser thinks it's the same size as its
-  // sibling images and it's swaped at the same time. 
-  function size(imageData, index) { 
-    imageData.height += index;
-    imageData.width += index;
-    return imageData;
-  }
-
   var services = {
 
     /**
@@ -139,10 +146,6 @@ var ImagePlaceholderSrc = function(options) {
               break;
           }
         }
-        // Check if the sizes should be increamented by one. 
-        if (!!options && !!options.unique) {
-          data = size(data, options.unique);
-        }
         return data;
       }
     },
@@ -158,16 +161,12 @@ var ImagePlaceholderSrc = function(options) {
         if (!data.category) {
           data['category'] = 'any'
         }
-        // Check if the sizes should be increamented by one. 
-        if (!!options && !!options.unique) {
-          data = size(data, options.unique);
-        }
         return data;
       }
     },
 
     /**
-     * PlaceCage Service - http://www.placecage.com/ 
+     * PlaceCage Service - http://www.placecage.com/
      * Supports: [greyscale, crazy] filters
      * @type {Object}
      */
@@ -184,10 +183,6 @@ var ImagePlaceholderSrc = function(options) {
               break;
           }
         }
-        // Check if the sizes should be increamented by one. 
-        if (!!options && !!options.unique) {
-          data = size(data, options.unique);
-        }
         return data;
       }
     },
@@ -201,10 +196,6 @@ var ImagePlaceholderSrc = function(options) {
               data.filter = 'g';
               break;
           }
-        }
-        // Check if the sizes should be increamented by one. 
-        if (!!options && !!options.unique) {
-          data = size(data, options.unique);
         }
         return data;
       }
@@ -232,7 +223,7 @@ var ImagePlaceholderSrc = function(options) {
       // If `service` contains an object set the value to `config`
       // and set the service to the default service
       if (!!service && typeof service !== 'string') {
-        config = service; 
+        config = service;
         service = defaults.service;
       }
 
@@ -242,7 +233,7 @@ var ImagePlaceholderSrc = function(options) {
         imageData.url = _this.src(imageData, service, config);
         // collect all the image data while omitting the height
         // height param doesn't seem to be support by responsive image
-        // ex: 'http://placehold.it/400x400 400w 400h' 
+        // ex: 'http://placehold.it/400x400 400w 400h'
         // see: W3C spec [FIX_ME: Update link]
         sources.push(_.omit(imageData, 'height'));
       });
@@ -271,7 +262,7 @@ var ImagePlaceholderSrc = function(options) {
       // If `service` contains an object set the value to `config`
       // and set the service to the default service
       if (!!service && typeof service !== 'string') {
-        config = service; 
+        config = service;
         service = defaults.service;
       }
       // IF `serviceOverride` exist, use the defined service
@@ -288,6 +279,8 @@ var ImagePlaceholderSrc = function(options) {
         template = createTemplate(settings.tmpl[serviceObj.name]);
       }
 
+      // Apply base data modifiers
+      data = baseModifier(data, options);
       // Apply specific service data modifiers
       data = serviceObj.modifier(data, options);
       // Return the rendered template
@@ -313,6 +306,6 @@ var ImagePlaceholderSrc = function(options) {
   });
 
   return exports;
-}; 
+};
 
 module.exports = ImagePlaceholderSrc;
