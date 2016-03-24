@@ -69,7 +69,7 @@ Attribute     | Options     | Description
 
 ### src(imageData, [service], [options])
 
-Accepts an image data object containing at least a height and width. If the optional `unique` attribute is passed, the image src size will be increamented by the `unique` value. This should be the index within a list. This forces the image services to send a different image instead of sending the same image if a duplicate size is requested. For example, the output would look like:
+Accepts an image data object containing at least a height and width. If the optional `unique` attribute is passed, the image src size will be incremented by the `unique` value. This should be the index within a list. This forces the image services to send a different image instead of sending the same image if a duplicate size is requested. For example, the output would look like:
 
 ```
 var data = [
