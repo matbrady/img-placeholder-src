@@ -19,9 +19,8 @@ npm install img-placeholder-src --save
 
 ## Usage
 
-```
+```js
 var ips = require('img-placeholder-src')();
-
 var imageData = {
   height: 100,
   width: 100
@@ -32,7 +31,10 @@ console.log(src);
 /*
 http://placehold.it/100x100
 */
+```
 
+```js
+var ips = require('img-placeholder-src')();
 var srcsetData = [
   {
     height: 100,
