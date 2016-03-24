@@ -2,6 +2,8 @@
 
 > helper for using structured data to populate various image placeholder sources.
 
+[![Build Status](https://travis-ci.org/matbrady/img-placeholder-src.svg?branch=master)](https://travis-ci.org/matbrady/img-placeholder-src)
+
 ## Table of Contents
 
 - [Install](#install)
