@@ -47,7 +47,7 @@ var srcsetData = [
 var srcset = ips.srcset(srcsetData, 'placeholdit');
 console.log(srcset);
 /*
-http://placehold.it/100x100 100w, http://placehold.it/200x200 200w,
+http://placehold.it/100x100 100w, http://placehold.it/200x200 200w
 */
 ```
 Each service supports different placeholder variations. An image data object that contains all types of image variations could include the following attributes.
