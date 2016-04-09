@@ -1,21 +1,19 @@
-var _      = require('underscore');
 var assert = require('chai').assert;
 var should = require('chai').should();
-var IPS    = require('../index');
-
-// var defaults = {
-//   "height": 100,
-//   "width":  100,
-//   "filter": "greyscale",
-//   "foreground": "ffffff",
-//   "background": "999999",
-//   "format": "gif",
-//   "text": "Hello world",
-//   category: "people"
-// };
+var IPS    = require('../dist/img-placeholder-src');
 
 var testData = {
   all: {
+    everything: {
+      height:     100,
+      width:      100,
+      filter:     "greyscale",
+      foreground: "ffffff",
+      background: "999999",
+      format:     "gif",
+      text:       "Hello World",
+      category:   "people"
+    },
     category: {
       category: "people",
       height: 100,
@@ -62,35 +60,56 @@ var testData = {
       filter: 'crazy',
       height: 100,
       width: 100
+    },
+    format: {
+      format: 'gif',
+      height: 100,
+      width: 100
+    }
+  },
+  lorempixel: {
+    text: {
+      height: 100,
+      width: 100,
+      category: "sports",
+      text: "Hello-World"
     }
   }
+
 };
 
 var results = {
   general: {
-    protocol: 'https://placehold.it/100x100'
+    protocol: 'https://placehold.it/100x100',
+    protocolSrcset: 'https://placehold.it/100x100 100w, https://placehold.it/200x200 200w'
   },
   placeholdit: {
     colors:  "//placehold.it/100x100/dddddd/000000",
+    everything: "//placehold.it/100x100/999999/ffffff.gif",
     format: "//placehold.it/100x100.jpg",
     src:    "//placehold.it/100x100",
     srcset: '//placehold.it/100x100 100w, //placehold.it/200x200 200w',
-    text:   "//placehold.it/100x100&text=hello+world"
+    text:   "//placehold.it/100x100?text=hello+world"
   },
   lorempixel: {
     category: "//lorempixel.com/100/100/people",
+    everything: "//lorempixel.com/g/100/100/people/Hello-World",
     filter: "//lorempixel.com/g/100/100",
     src: "//lorempixel.com/100/100",
     srcset: "//lorempixel.com/100/100 100w, //lorempixel.com/200/200 200w",
+    text:   "//lorempixel.com/100/100/sports/Hello-World",
     unqiue: "//lorempixel.com/102/102 100w, //lorempixel.com/202/202 200w"
   },
   fillmurray: {
+    everything: "//fillmurray.com/g/100/100",
     filter: "//fillmurray.com/g/100/100",
     src: "//fillmurray.com/100/100",
     srcset: "//fillmurray.com/100/100 100w, //fillmurray.com/200/200 200w",
     unqiue: "//fillmurray.com/102/102 100w, //fillmurray.com/202/202 200w"
   },
   placecage: {
+    everything: "//placecage.com/gif/100/100",
+    format: "//placecage.com/gif/100/100",
     filter: "//placecage.com/g/100/100",
     crazy: "//placecage.com/c/100/100",
     src: "//placecage.com/100/100",
@@ -98,12 +117,15 @@ var results = {
     unqiue: "//placecage.com/102/102 100w, //placecage.com/202/202 200w"
   },
   placeimg: {
-    filter: "//placeimg.com/100/100/any/greyscale",
+    everything: "//placeimg.com/100/100/people/grayscale",
+    filter: "//placeimg.com/100/100/any/grayscale",
     src: "//placeimg.com/100/100/any",
     srcset: "//placeimg.com/100/100/any 100w, //placeimg.com/200/200/any 200w",
     unqiue: "//placeimg.com/102/102/any 100w, //placeimg.com/202/202/any 200w"
   },
   placekitten: {
+    everything: "//placekitten.com/g/100/100",
+    filter: "//placekitten.com/g/100/100",
     src: "//placekitten.com/100/100",
     unqiue: "//placekitten.com/102/102 100w, //placekitten.com/202/202 200w"
   }
@@ -114,7 +136,7 @@ describe('img-placeholder-src', function() {
   context('general', function() {
 
     before(function(){
-      ips = IPS();
+      ips = new IPS();
     });
 
     after(function() {
@@ -140,7 +162,7 @@ describe('img-placeholder-src', function() {
     context('without service override', function() {
 
       before(function(){
-        ips = IPS();
+        ips = new IPS();
       });
 
       after(function() {
@@ -172,7 +194,7 @@ describe('img-placeholder-src', function() {
     context('with service override', function() {
 
       before(function(){
-        ips = IPS({
+        ips = new IPS({
           serviceOverride: 'placeimg'
         });
       });
@@ -190,7 +212,7 @@ describe('img-placeholder-src', function() {
     context('with protocol override', function() {
 
       before(function(){
-        ips = IPS({
+        ips = new IPS({
           protocol: 'https'
         });
       });
@@ -203,6 +225,10 @@ describe('img-placeholder-src', function() {
         ips.src(testData.all.src).should.equal(results.general.protocol);
       });
 
+      it('should generate a srcset: ' + results.general.protocol, function() {
+        ips.srcset(testData.all.srcset).should.equal(results.general.protocolSrcset);
+      });
+
     });
 
   });
@@ -212,7 +238,7 @@ describe('img-placeholder-src', function() {
     context('without service override', function() {
 
       before(function(){
-        ips = IPS();
+        ips = new IPS();
       });
 
       after(function() {
@@ -244,7 +270,7 @@ describe('img-placeholder-src', function() {
     context('with service override', function() {
 
       before(function(){
-        ips = IPS({
+        ips = new IPS({
           serviceOverride: 'placeimg'
         });
       });
@@ -264,7 +290,7 @@ describe('img-placeholder-src', function() {
   describe('#placeholdit', function() {
 
     before(function(){
-      ips = IPS();
+      ips = new IPS();
     });
 
     after(function() {
@@ -295,6 +321,10 @@ describe('img-placeholder-src', function() {
       ips.placeholdit.src(testData.all.colors).should.equal(results.placeholdit.colors);
     });
 
+    it('should generate a src with everything: ' + results.placeholdit.everything, function() {
+      ips.placeholdit.src(testData.all.everything).should.equal(results.placeholdit.everything);
+    });
+
     it('should generate a srcset: ' + results.placeholdit.srcset, function() {
       ips.placeholdit.srcset(testData.all.srcset).should.equal(results.placeholdit.srcset);
     });
@@ -304,7 +334,7 @@ describe('img-placeholder-src', function() {
   describe('#lorempixel', function() {
 
     before(function(){
-      ips = IPS();
+      ips = new IPS();
     });
 
     after(function() {
@@ -335,6 +365,14 @@ describe('img-placeholder-src', function() {
       ips.lorempixel.src(testData.all.category).should.equal(results.lorempixel.category);
     });
 
+    it('should generate a src with custom text: ' + results.lorempixel.text, function() {
+      ips.lorempixel.src(testData.lorempixel.text).should.equal(results.lorempixel.text);
+    });
+
+    it('should generate a src with everything: ' + results.lorempixel.everything, function() {
+      ips.lorempixel.src(testData.all.everything).should.equal(results.lorempixel.everything);
+    });
+
     it('should generate a srcset with unique dimensions: ' + results.lorempixel.unqiue, function() {
       ips.lorempixel.srcset(testData.all.srcset, {unique: 2}).should.equal(results.lorempixel.unqiue);
     });
@@ -344,7 +382,7 @@ describe('img-placeholder-src', function() {
   describe('#fillmurray', function() {
 
     before(function(){
-      ips = IPS();
+      ips = new IPS();
     });
 
     after(function() {
@@ -371,6 +409,10 @@ describe('img-placeholder-src', function() {
       ips.fillmurray.src(testData.all.filter).should.equal(results.fillmurray.filter);
     });
 
+    it('should generate a src with everything: ' + results.fillmurray.everything, function() {
+      ips.fillmurray.src(testData.all.everything).should.equal(results.fillmurray.everything);
+    });
+
     it('should generate a srcset with unique dimensions: ' + results.fillmurray.unqiue, function() {
       ips.fillmurray.srcset(testData.all.srcset, {unique: 2}).should.equal(results.fillmurray.unqiue);
     });
@@ -380,7 +422,7 @@ describe('img-placeholder-src', function() {
   describe('#placecage', function() {
 
     before(function(){
-      ips = IPS();
+      ips = new IPS();
     });
 
     after(function() {
@@ -411,6 +453,14 @@ describe('img-placeholder-src', function() {
       ips.placecage.src(testData.placecage.crazy).should.equal(results.placecage.crazy);
     });
 
+    it('should generate a src with a custom format: ' + results.placecage.format, function() {
+      ips.placecage.src(testData.placecage.format).should.equal(results.placecage.format);
+    });
+
+    it('should generate a src with everything: ' + results.placecage.everything, function() {
+      ips.placecage.src(testData.all.everything).should.equal(results.placecage.everything);
+    });
+
     it('should generate a srcset with unique dimensions: ' + results.placecage.unqiue, function() {
       ips.placecage.srcset(testData.all.srcset, {unique: 2}).should.equal(results.placecage.unqiue);
     });
@@ -420,7 +470,7 @@ describe('img-placeholder-src', function() {
   describe('#placeimg', function() {
 
     before(function(){
-      ips = IPS();
+      ips = new IPS();
     });
 
     after(function() {
@@ -447,42 +497,61 @@ describe('img-placeholder-src', function() {
       ips.placeimg.src(testData.all.filter).should.equal(results.placeimg.filter);
     });
 
+    it('should generate a src with everything: ' + results.placeimg.everything, function() {
+      ips.placeimg.src(testData.all.everything).should.equal(results.placeimg.everything);
+    });
+
     it('should generate a srcset with unique dimensions: ' + results.placeimg.unqiue, function() {
       ips.placeimg.srcset(testData.all.srcset, {unique: 2}).should.equal(results.placeimg.unqiue);
     });
 
   });
 
-  context('engine', function() {
-
-    before(function(){
-      ips = IPS({
-        engine: _,
-        tmpl: {
-          placeholdit: "<%= protocol %>//placehold.it/<%= width %>x<%= height %>"
-        }
-      });
-    });
-
-    after(function() {
-      ips = null;
-    });
-
-    it('should render using an alternative template engine', function() {
-      ips.src(testData.all.src).should.equal(results.placeholdit.src);
-    });
-
-  });
+  // DEPRICATED
+  // IPS no longer uses a templating engine. Instead, each service requires a
+  // function to be passed as it's template.
+  // context('engine', function() {
+  //
+  //   before(function(){
+  //     ips = new IPS({
+  //       engine: _,
+  //       tmpl: {
+  //         placeholdit: "<%= protocol %>//placehold.it/<%= width %>x<%= height %>"
+  //       }
+  //     });
+  //   });
+  //
+  //   after(function() {
+  //     ips = null;
+  //   });
+  //
+  //   it('should render using an alternative template engine', function() {
+  //     ips.src(testData.all.src).should.equal(results.placeholdit.src);
+  //   });
+  //
+  // });
 
   describe('custom serivce', function() {
 
     before(function(){
-      ips = IPS();
+      ips = new IPS();
 
       ips.register({
         name: 'placekitten',
-        template: '{{ protocol }}//placekitten.com{{ "/"+filter if filter }}/{{ width }}/{{ height }}',
+        render: function(args) {
+          return (typeof(args.protocol) !== 'undefined' ? args.protocol : "")
+            + '//placekitten.com'
+            + (typeof(args.filter) !== 'undefined' ? '/'+args.filter : "")
+            + '/' + args.width + '/' + args.width;
+        },
         modifier: function(data) {
+          if (!!data.filter) {
+            switch(data.filter) {
+              case 'greyscale':
+                data.filter = 'g';
+                break;
+            }
+          }
           return data;
         }
       });
@@ -496,11 +565,18 @@ describe('img-placeholder-src', function() {
       ips.src(testData.all.src, 'placekitten').should.equal(results.placekitten.src);
     });
 
-    it('should generate a srcset with unique dimensions: ' + results.placeimg.unqiue, function() {
+    it('should generate a src with a custom filter: ' + results.placekitten.filter, function() {
+      ips.placekitten.src(testData.all.filter).should.equal(results.placekitten.filter);
+    });
+
+    it('should generate a src with everything: ' + results.placekitten.everything, function() {
+      ips.placekitten.src(testData.all.everything).should.equal(results.placekitten.everything);
+    });
+
+    it('should generate a srcset with unique dimensions: ' + results.placekitten.unqiue, function() {
       ips.placekitten.srcset(testData.all.srcset, {unique: 2}).should.equal(results.placekitten.unqiue);
     });
 
   });
 
 });
-

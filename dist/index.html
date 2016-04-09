@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Image Placeholder Source</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <link rel="icon" href="favicon.ico?v=2" type="image/x-icon" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.0/foundation.min.css" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,400italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="stylesheets/styles.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/themes/prism.min.css"> -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/themes/prism-coy.css"> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/picturefill/3.0.2/picturefill.js"></script>
+</head>
+<body>
+  <div class="Header">
+    <h1 class="Header-title">Image Placeholder Source</h1>
+    <p>a helper for using structured data to populate various image placeholder sources.</p>
+    <code class="-large">
+      npm install img-placeholder-src
+    </code>
+    <br>
+    <img src="https://travis-ci.org/matbrady/img-placeholder-src.svg?branch=master" alt="">
+    <img src="https://badge.fury.io/js/img-placeholder-src.svg" alt="">
+    <div class="Header-buttons">
+      <a href="https://github.com/matbrady/img-placeholder-src" class="Button">Docs</a>
+      <br><br>
+      <a class="github-button" href="https://github.com/matbrady/img-placeholder-src" aria-label="Star matbrady/img-placeholder-src on GitHub">Star</a>
+      <br><br>
+      <ul class="Toc">
+        <li class="Toc-item"><a class="Toc-link" href="#playground">Playground</a></li>
+        <li class="Toc-item"><a class="Toc-link" href="#image-sources">Image Sources</a></li>
+        <li class="Toc-item"><a class="Toc-link" href="#image-variations">Image Variations</a></li>
+        <li class="Toc-item"><a class="Toc-link" href="#service-override">Service Override</a></li>
+      </ul>
+      This page is meant to serve as an overview of what the module can do. For details, reference the <a href="https://github.com/matbrady/img-placeholder-src">API docs</a>
+    </div>
+  </div>
+
+  <div class="Main clearfix">
+    <div class="Section">
+      <div class="Examples-header">
+        <h2 id="playground">Playground</h2>
+      </div>
+      <noscript>
+        <p><strong>These examples require javascript to work properly. Please enable before continuing</strong></p>
+      </noscript>
+      <p>Choose your options and hit update to load the new placeholder image. Keep in mind, not all options are supported by each placeholder image service.</p>
+      <form id="form" class="Form clearfix" action="#">
+        <div class="Form-inputGroup">
+          <label for="service">service<small>*</small></label>
+          <select name="service" id="service">
+            <option value="placeholdit" selected>placeholdit</option>
+            <option value="placeimg">placeimg</option>
+            <option value="fillmurray">fillmurray</option>
+            <option value="placecage">placecage</option>
+            <option value="lorempixel">lorempixel</option>
+          </select>
+        </div>
+        <div class="Form-inputGroup">
+          <label for="height">height<small>*</small></label>
+          <input name="height" id="height" type="text" placeholder="100" value="400">
+        </div>
+        <div class="Form-inputGroup">
+          <label for="width">width<small>*</small></label>
+          <input name="width" id="width" type="text" placeholder="100" value="800">
+        </div>
+        <div class="Form-inputGroup">
+          <label for="filter">filter</label>
+          <select name="filter" id="filter">
+            <option value="" selected>none</option>
+            <option value="greyscale">greyscale</option>
+            <option value="sepia">sepia</option>
+            <option value="crazy">crazy</option>
+          </select>
+        </div>
+        <div class="Form-inputGroup">
+          <label for="foreground">foreground <small>(text)</small></label>
+          <input name="foreground" id="foreground" class="jscolor" type="text" placeholder="333333" value="333333">
+        </div>
+        <div class="Form-inputGroup">
+          <label for="background">background</label>
+          <input name="background" id="background" class="jscolor" type="text" placeholder="CCCCCC" value="CCCCCC">
+        </div>
+        <div class="Form-inputGroup">
+          <label for="format">format</label>
+          <select name="format" id="format">
+            <option value="" selected>none</option>
+            <option value="gif">gif</option>
+            <option value="jpeg">jpeg</option>
+            <option value="png">png</option>
+          </select>
+        </div>
+        <div class="Form-inputGroup">
+          <label for="text">text</label>
+          <input name="text" id="text" type="text" placeholder="Hello World" value="Hello World">
+        </div>
+        <div class="Form-inputGroup">
+          <label for="category">category</label>
+          <input name="category" id="category" type="text" placeholder="nature" value="nature">
+        </div>
+        <div class="Form-footer">
+          <small>* indicates required</small><br>
+          <button class="Form-button Button -large" type="submit">Update</button>
+        </div>
+      </form>
+      <div>
+        <div id="ImageResult">
+          <div class="ImageResult-source"><code class="-large -dark"></code></div>
+          <img class="ImageResult-image loading" src="images/loading.gif" alt="">
+        </div>
+      </div>
+    </div>
+
+    <div class="Section">
+      <div class="Examples-header">
+        <h2 id="image-sources">Image Sources</h2>
+      </div>
+      <p>Here are examples of all the provided image placeholder services as well as an example of a custom image service. Each of these examples uses the same image data but the url is generated from a difference IPS image service.</p>
+      <p>See <a href="https://github.com/matbrady/img-placeholder-src#usage">Usage docs</a> for details</p>
+      <div class="Examples clearfix">
+        <div class="Example">
+          <img id="img1" src="" alt="">
+          <p>Default Source</p>
+        </div>
+        <div class="Example">
+          <img id="img2" src="" sizes="(min-width: 500px) 300px, 100vw" alt="">
+          <p>Default Srcset</p>
+        </div>
+
+        <div class="Example">
+          <img id="img3" src="" alt="">
+          <p>Lorempixel Source</p>
+        </div>
+        <div class="Example">
+          <img id="img4" src="" sizes="(min-width: 500px) 300px, 100vw" alt="">
+          <p>Lorempixel Srcset</p>
+        </div>
+
+        <div class="Example">
+          <img id="img5" src="" alt="">
+          <p>Fillmurray Source</p>
+        </div>
+        <div class="Example">
+          <img id="img6" src="" sizes="(min-width: 500px) 300px, 100vw" alt="">
+          <p>Fillmurray Srcset</p>
+        </div>
+
+        <div class="Example">
+          <img id="img7" src="" alt="">
+          <p>Placecage Source</p>
+        </div>
+        <div class="Example">
+          <img id="img8" src="" sizes="(min-width: 500px) 300px, 100vw" alt="">
+          <p>Placecage Srcset</p>
+        </div>
+
+        <div class="Example">
+          <img id="img9" src="" alt="">
+          <p>Placeimg Source</p>
+        </div>
+        <div class="Example">
+          <img id="img10" src="" sizes="(min-width: 500px) 300px, 100vw" alt="">
+          <p>Placeimg Srcset</p>
+        </div>
+
+        <div class="Example">
+          <img id="img11" src="" alt="">
+          <p>Custom Source <small>(placekitten)</small></p>
+        </div>
+        <div class="Example">
+          <img id="img12" src="" sizes="(min-width: 500px) 300px, 100vw" alt="">
+          <p>Custom Srcset <small>(placekitten)</small></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="Section">
+      <div class="Examples-header">
+        <h2 id="image-variations">Image Variations</h2>
+      </div>
+      <p>Passing the <code>unique</code> option increments the photo image size by one. This forces the image services to provide a differnt image, rather that sending the same image for match dimension requests.</p>
+      <p>See <a href="https://github.com/matbrady/img-placeholder-src#api">API docs</a> for details</p>
+
+      <h3>Non-Unique</h3>
+      <div class="Examples clearfix">
+        <div class="Example">
+          <img id="sameImage1" src="" alt="">
+        </div>
+        <div class="Example">
+          <img id="sameImage2" src="" alt="">
+        </div>
+        <div class="Example">
+          <img id="sameImage3" src="" alt="">
+        </div>
+        <div class="Example">
+          <img id="sameImage4" src="" alt="">
+        </div>
+      </div>
+      <h3>Unique</h3>
+      <div class="Examples clearfix">
+        <div class="Example">
+          <img id="uniqueImage1" src="" alt="">
+        </div>
+        <div class="Example">
+          <img id="uniqueImage2" src="" alt="">
+        </div>
+        <div class="Example">
+          <img id="uniqueImage3" src="" alt="">
+        </div>
+        <div class="Example">
+          <img id="uniqueImage4" src="" alt="">
+        </div>
+      </div>
+    </div>
+
+    <div class="Section">
+      <div class="Examples-header">
+        <h2 id="service-override">Service Override</h2>
+      </div>
+      <p>Setting a <code>serviceOverride</code> option when initailizing a IPS instance will force all placeholder images to use that service.</p>
+      <p>See <a href="https://github.com/matbrady/img-placeholder-src#api">API docs</a> for details</p>
+      <div class="Examples clearfix">
+        <div class="Example">
+          <img id="override1" src="" alt="">
+          placecage
+        </div>
+        <div class="Example">
+          <img id="override2" src="" alt="">
+          lorempixel
+        </div>
+        <div class="Example">
+          <img id="override3" src="" alt="">
+          placeimg
+        </div>
+        <div class="Example">
+          <img id="override4" src="" alt="">
+          fillmurray
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="Footer">
+    <h2>Special Thanks</h2>
+    <p>To the placeholder image services. Without them, this module would not be <strike>possible</strike> useful.</p>
+    <a href="http://placehold.it/">placeholdit</a>,
+    <a href="https://placeimg.com/">placeimg</a>,
+    <a href="http://www.fillmurray.com/">fillmurray</a>,
+    <a href="http://www.placecage.com/">placecage</a>,
+    <a href="http://lorempixel.com/">lorempixel</a>,
+    <a href="http://placekitten.com/">placekitten</a>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.3.3/backbone-min.js"></script>
+  <script src="javascripts/jscolor.min.js"></script>
+  <script src="bundle.js"></script>
+  <script src="javascripts/main.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/components/prism-javascript.min.js"></script> -->
+  <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+</body>
+</html>
