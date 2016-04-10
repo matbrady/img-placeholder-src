@@ -12,7 +12,8 @@
     "build:bundle": "WEBPACK_BUILD=bundle webpack --optimize-minimize --config ./webpack.config.js",
     "dev": "npm run build:dev && npm run watch",
     "dev:serve": "WEBPACK_BUILD=server webpack-dev-server --open --inline --content-base ./dist",
-    "report": "filesize-cli ./src && filesize-cli ./dist/"
+    "report": "filesize-cli ./src && filesize-cli ./dist/",
+    "deploy": "git subtree push --prefix dist origin gh-pages"
   },
   "engine": {
     "node": ">=0.10 <5.9"
