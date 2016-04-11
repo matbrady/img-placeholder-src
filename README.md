@@ -228,18 +228,18 @@ git subtree push --prefix dist origin gh-pages
 
 ## Compatibility
 
-Latest Chrome
-Latest Safari
-Latest Firefox
-Latest Mobile Safari
-IE 9+
-Node 0.10+ via [TravisCI](https://travis-ci.org/matbrady/img-placeholder-src)
+Latest Chrome  
+Latest Safari  
+Latest Firefox  
+Latest Mobile Safari  
+IE 9+  
+Node 0.10+ via [TravisCI](https://travis-ci.org/matbrady/img-placeholder-src)  
 
 [MIT](http://opensource.org/licenses/MIT) © [Mat Brady](https://github.com/matbrady)
 
 ## Changelog
 
-- 2.0
+- 3.0
   - Support for a template engine was removed so it could be used in the browser (for whatever reason) and to make the package smaller
   - `register()` now requires a `render` function to return the rendered image source string instead of a template.  
   - support for gif in `placecage` image service using the `format` value
