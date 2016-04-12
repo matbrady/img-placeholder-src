@@ -221,9 +221,9 @@ As developers, we should always be testing and optimizing our code to be as effi
 `npm run dev` - runs the webpack build and tests the application for errors.
 
 ##### Update Example Page
-push updates to the github pages branch
+pushes current checked out branch to the remote github-pages (`gh-pages`) branch
 ```
-git subtree push --prefix dist origin gh-pages
+npm run deploy
 ```
 
 ## Compatibility
@@ -239,25 +239,17 @@ Node 0.10+ via [TravisCI](https://travis-ci.org/matbrady/img-placeholder-src)
 
 ## Changelog
 
-- 3.0
-  - Support for a template engine was removed so it could be used in the browser (for whatever reason) and to make the package smaller
-  - `register()` now requires a `render` function to return the rendered image source string instead of a template.  
-  - support for gif in `placecage` image service using the `format` value
-- removed height from srcset string output
-- added root `src` and `srcset` functions
-- added serviceOverride option
-- added http protocol override option
+Chackout the [Github release feed](https://github.com/matbrady/img-placeholder-src/releases)
 
 ## Todo
 
-
+- [ ] register custom placeholder template for existing services
+- [ ] override existing templates
+- [ ] investigate whitelisting image options (ex: accepted formats or filters)
 - [x] https support
 - [x] es6 re-write
 - [x] browser support
  - [x] remove extraneous dependencies
  - [x] create distribution package using webpack
-- [ ] register custom placeholder template for existing services
-- [ ] override existing templates
 - [x] add global service override function
 - [x] support incrementing source size for custom registered services
-- [ ] investigate whitelisting image options (ex: accepted formats or filters)
