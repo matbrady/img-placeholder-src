@@ -16,7 +16,7 @@
     "deploy": "git subtree push --prefix dist origin gh-pages"
   },
   "engine": {
-    "node": ">=0.10 <5.9"
+    "node": ">=0.10 <6.0"
   },
   "repository": {
     "type": "git",
