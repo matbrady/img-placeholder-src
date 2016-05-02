@@ -203,8 +203,17 @@ code.-dark {
 }
 
 .ImageResult {}
-  
-.ImageResult-source {}
+
+.ImageResult-source {
+  overflow-x: scroll;
+  font-size: 13px;
+}
+
+@media (min-width: 400px) {
+  .ImageResult-source {
+    font-size: 15px;
+  }
+}
 
 .ImageResult-image {
   border: solid 1px #ddd;
