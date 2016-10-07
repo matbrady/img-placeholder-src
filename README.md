@@ -4,7 +4,7 @@
 
 [![Build Status](https://travis-ci.org/matbrady/img-placeholder-src.svg?branch=master)](https://travis-ci.org/matbrady/img-placeholder-src) [![npm version](https://badge.fury.io/js/img-placeholder-src.svg?v=3.0.0)](https://badge.fury.io/js/img-placeholder-src)
 
-**[Demo](http://matbrady.github.io/img-placeholder-src/)** showing keys features. For code examples and docs, see below. 
+**[Demo](http://matbrady.github.io/img-placeholder-src/)** showing keys features. For code examples and docs, see below.
 
 ## Table of Contents
 
@@ -45,7 +45,9 @@ http://placehold.it/100x100
 ```
 
 ```js
-var ips = require('img-placeholder-src')();
+var IPS = require('img-placeholder-src');
+var ips = new IPS;
+
 var srcsetData = [
   {
     height: 100,
