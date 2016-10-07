@@ -12,7 +12,11 @@ var testData = {
       background: "999999",
       format:     "gif",
       text:       "Hello World",
-      category:   "people"
+      category:   "people",
+      delay:      1000,
+      flag:       "usa",
+      brand:      "apple",
+      texture:    "cross"
     },
     category: {
       category: "people",
@@ -128,7 +132,15 @@ var results = {
     filter: "//placekitten.com/g/100/100",
     src: "//placekitten.com/100/100",
     unqiue: "//placekitten.com/102/102 100w, //placekitten.com/202/202 200w"
-  }
+  },
+  satyr: {
+    colors:  "//satyr.io/100x100/dddddd",
+    everything: "//satyr.io/100x100/999999?type=gif&text=Hello+World&delay=1000&brand=apple&flag=usa&texture=cross",
+    format: "//satyr.io/100x100?type=jpg",
+    src:    "//satyr.io/100x100",
+    srcset: '//satyr.io/100x100 100w, //satyr.io/200x200 200w',
+    text:   "//satyr.io/100x100?text=hello+world"
+  },
 };
 
 describe('img-placeholder-src', function() {
@@ -187,6 +199,10 @@ describe('img-placeholder-src', function() {
 
       it('should generate a placeimg src: ' + results.placeimg.src, function() {
         ips.src(testData.all.src, 'placeimg').should.equal(results.placeimg.src);
+      });
+
+      it('should generate a satyr src: ' + results.satyr.src, function() {
+        ips.src(testData.all.src, 'satyr').should.equal(results.satyr.src);
       });
 
     });
@@ -263,6 +279,10 @@ describe('img-placeholder-src', function() {
 
       it('should generate a placeimg srcset: ' + results.placeimg.srcset, function() {
         ips.srcset(testData.all.srcset, 'placeimg').should.equal(results.placeimg.srcset);
+      });
+
+      it('should generate a satyr srcset: ' + results.satyr.srcset, function() {
+        ips.srcset(testData.all.srcset, 'satyr').should.equal(results.satyr.srcset);
       });
 
     });
@@ -507,6 +527,50 @@ describe('img-placeholder-src', function() {
 
   });
 
+  describe('#satyr', function() {
+
+    before(function(){
+      ips = new IPS();
+    });
+
+    after(function() {
+      ips = null;
+    });
+
+    it('should have a satyr src function', function() {
+      assert.isFunction(ips.satyr.src);
+    });
+
+    it('should have a satyr srcset function', function() {
+      assert.isFunction(ips.satyr.srcset);
+    });
+
+    it('should generate a src:' + results.satyr.src, function() {
+      ips.satyr.src(testData.all.src).should.equal(results.satyr.src);
+    });
+
+    it('should generate a src with custom text: ' + results.satyr.text, function() {
+      ips.satyr.src(testData.all.text).should.equal(results.satyr.text);
+    });
+
+    it('should generate a src with a custom format: ' + results.satyr.format, function() {
+      ips.satyr.src(testData.all.format).should.equal(results.satyr.format);
+    });
+
+    it('should generate a src with custom colors: ' + results.satyr.colors, function() {
+      ips.satyr.src(testData.all.colors).should.equal(results.satyr.colors);
+    });
+
+    it('should generate a src with everything: ' + results.satyr.everything, function() {
+      ips.satyr.src(testData.all.everything).should.equal(results.satyr.everything);
+    });
+
+    it('should generate a srcset: ' + results.satyr.srcset, function() {
+      ips.satyr.srcset(testData.all.srcset).should.equal(results.satyr.srcset);
+    });
+
+  });
+
   // DEPRICATED
   // IPS no longer uses a templating engine. Instead, each service requires a
   // function to be passed as it's template.
@@ -528,7 +592,6 @@ describe('img-placeholder-src', function() {
   //   it('should render using an alternative template engine', function() {
   //     ips.src(testData.all.src).should.equal(results.placeholdit.src);
   //   });
-  //
   // });
 
   describe('custom serivce', function() {
