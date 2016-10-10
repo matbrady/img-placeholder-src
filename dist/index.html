@@ -56,6 +56,7 @@
             <option value="fillmurray">fillmurray</option>
             <option value="placecage">placecage</option>
             <option value="lorempixel">lorempixel</option>
+            <option value="satyr">satyr</option>
           </select>
         </div>
         <div class="Form-inputGroup">
@@ -72,7 +73,7 @@
             <option value="" selected>none</option>
             <option value="greyscale">greyscale</option>
             <option value="sepia">sepia</option>
-            <option value="crazy">crazy</option>
+            <option value="crazy">crazy (placecage only)</option>
           </select>
         </div>
         <div class="Form-inputGroup">
@@ -90,6 +91,7 @@
             <option value="gif">gif</option>
             <option value="jpeg">jpeg</option>
             <option value="png">png</option>
+            <option value="webp">webp (satyr only)</option>
           </select>
         </div>
         <div class="Form-inputGroup">
@@ -100,9 +102,436 @@
           <label for="category">category</label>
           <input name="category" id="category" type="text" placeholder="nature" value="nature">
         </div>
+
+        <div class="Form-inputGroup" data-requires="service:satyr">
+          <label for="delay">delay</label>
+          <input name="delay" id="delay" type="text" placeholder="in milliseconds" value="">
+        </div>
+        <div class="Form-inputGroup" data-requires="service:satyr">
+          <label for="brand">brand</label>
+          <!-- <input name="brand" id="brand" type="text" placeholder="apple" value=""> -->
+          <select name="brand" id="brand">
+            <option value="" selected>none</option>
+            <option value="500px">500px</option>
+            <option value="aboutme">aboutme</option>
+            <option value="air">air</option>
+            <option value="airbnb">airbnb</option>
+            <option value="amazon">amazon</option>
+            <option value="americanexpress">americanexpress</option>
+            <option value="android">android</option>
+            <option value="apple">apple</option>
+            <option value="appnet">appnet</option>
+            <option value="automatic">automatic</option>
+            <option value="bandcamp">bandcamp</option>
+            <option value="basecamp">basecamp</option>
+            <option value="bathasu">bathasu</option>
+            <option value="bebo">bebo</option>
+            <option value="behance">behance</option>
+            <option value="bigcartel">bigcartel</option>
+            <option value="bing">bing</option>
+            <option value="bitbucket">bitbucket</option>
+            <option value="bitcoin">bitcoin</option>
+            <option value="bitly">bitly</option>
+            <option value="bootstrap">bootstrap</option>
+            <option value="buzzfeed">buzzfeed</option>
+            <option value="campaignmonitor">campaignmonitor</option>
+            <option value="circleci">circleci</option>
+            <option value="codecademy">codecademy</option>
+            <option value="codepen">codepen</option>
+            <option value="coderwall">coderwall</option>
+            <option value="codeschool">codeschool</option>
+            <option value="codio">codio</option>
+            <option value="conekta">conekta</option>
+            <option value="coursera">coursera</option>
+            <option value="dailymotion">dailymotion</option>
+            <option value="deezer">deezer</option>
+            <option value="delicious">delicious</option>
+            <option value="designernews">designernews</option>
+            <option value="deviantart">deviantart</option>
+            <option value="diaspora">diaspora</option>
+            <option value="digg">digg</option>
+            <option value="digitalocean">digitalocean</option>
+            <option value="disqus">disqus</option>
+            <option value="dribbble">dribbble</option>
+            <option value="dropbox">dropbox</option>
+            <option value="drupal">drupal</option>
+            <option value="ello">ello</option>
+            <option value="email">email</option>
+            <option value="empirekred">empirekred</option>
+            <option value="etsy">etsy</option>
+            <option value="eventbrite">eventbrite</option>
+            <option value="eventstore">eventstore</option>
+            <option value="evernote">evernote</option>
+            <option value="facebook">facebook</option>
+            <option value="feedly">feedly</option>
+            <option value="fitbit">fitbit</option>
+            <option value="flickr">flickr</option>
+            <option value="flipboard">flipboard</option>
+            <option value="foursquare">foursquare</option>
+            <option value="geeklist">geeklist</option>
+            <option value="geocaching">geocaching</option>
+            <option value="ghost">ghost</option>
+            <option value="git">git</option>
+            <option value="github">github</option>
+            <option value="glassdoor">glassdoor</option>
+            <option value="goldenline">goldenline</option>
+            <option value="google">google</option>
+            <option value="googleanalytics">googleanalytics</option>
+            <option value="googledrive">googledrive</option>
+            <option value="googleplay">googleplay</option>
+            <option value="googleplus">googleplus</option>
+            <option value="govuk">govuk</option>
+            <option value="gratipay">gratipay</option>
+            <option value="gravatar">gravatar</option>
+            <option value="gulp">gulp</option>
+            <option value="heroku">heroku</option>
+            <option value="houzz">houzz</option>
+            <option value="html5">html5</option>
+            <option value="hulu">hulu</option>
+            <option value="imdb">imdb</option>
+            <option value="instagram">instagram</option>
+            <option value="invision">invision</option>
+            <option value="javascript">javascript</option>
+            <option value="jekyll">jekyll</option>
+            <option value="joomla">joomla</option>
+            <option value="json">json</option>
+            <option value="justgiving">justgiving</option>
+            <option value="kaggle">kaggle</option>
+            <option value="khanacademy">khanacademy</option>
+            <option value="kickstarter">kickstarter</option>
+            <option value="kik">kik</option>
+            <option value="kirby">kirby</option>
+            <option value="klout">klout</option>
+            <option value="koding">koding</option>
+            <option value="lanyrd">lanyrd</option>
+            <option value="laravel">laravel</option>
+            <option value="lastfm">lastfm</option>
+            <option value="launchpad">launchpad</option>
+            <option value="line">line</option>
+            <option value="linkedin">linkedin</option>
+            <option value="livejournal">livejournal</option>
+            <option value="macys">macys</option>
+            <option value="magento">magento</option>
+            <option value="makerbot">makerbot</option>
+            <option value="mastercard">mastercard</option>
+            <option value="matternet">matternet</option>
+            <option value="mediatemple">mediatemple</option>
+            <option value="medium">medium</option>
+            <option value="meetup">meetup</option>
+            <option value="messenger">messenger</option>
+            <option value="microgenetics">microgenetics</option>
+            <option value="minutemailer">minutemailer</option>
+            <option value="mixcloud">mixcloud</option>
+            <option value="monkeytie">monkeytie</option>
+            <option value="moo">moo</option>
+            <option value="myspace">myspace</option>
+            <option value="netflix">netflix</option>
+            <option value="odnoklassniki">odnoklassniki</option>
+            <option value="onedrive">onedrive</option>
+            <option value="opera">opera</option>
+            <option value="overcast">overcast</option>
+            <option value="patreon">patreon</option>
+            <option value="periscope">periscope</option>
+            <option value="pingup">pingup</option>
+            <option value="pinterest">pinterest</option>
+            <option value="playerme">playerme</option>
+            <option value="pocket">pocket</option>
+            <option value="podcasts">podcasts</option>
+            <option value="protoio">protoio</option>
+            <option value="quora">quora</option>
+            <option value="rdio">rdio</option>
+            <option value="readability">readability</option>
+            <option value="readthedocs">readthedocs</option>
+            <option value="reddit">reddit</option>
+            <option value="reverbnation">reverbnation</option>
+            <option value="rss">rss</option>
+            <option value="sass">sass</option>
+            <option value="saucelabs">saucelabs</option>
+            <option value="shopify">shopify</option>
+            <option value="simpleicons">simpleicons</option>
+            <option value="sinaweibo">sinaweibo</option>
+            <option value="sitepoint">sitepoint</option>
+            <option value="skype">skype</option>
+            <option value="slack">slack</option>
+            <option value="smashingmagazine">smashingmagazine</option>
+            <option value="songkick">songkick</option>
+            <option value="soundcloud">soundcloud</option>
+            <option value="speakerdeck">speakerdeck</option>
+            <option value="spotify">spotify</option>
+            <option value="spreaker">spreaker</option>
+            <option value="squarespace">squarespace</option>
+            <option value="stackoverflow">stackoverflow</option>
+            <option value="statamic">statamic</option>
+            <option value="stitcher">stitcher</option>
+            <option value="storify">storify</option>
+            <option value="stripe">stripe</option>
+            <option value="stubhub">stubhub</option>
+            <option value="stumbleupon">stumbleupon</option>
+            <option value="swarm">swarm</option>
+            <option value="ted">ted</option>
+            <option value="tesla">tesla</option>
+            <option value="tinder">tinder</option>
+            <option value="topcoder">topcoder</option>
+            <option value="trakt">trakt</option>
+            <option value="travisci">travisci</option>
+            <option value="treehouse">treehouse</option>
+            <option value="trello">trello</option>
+            <option value="tripadvisor">tripadvisor</option>
+            <option value="trulia">trulia</option>
+            <option value="tumblr">tumblr</option>
+            <option value="twilio">twilio</option>
+            <option value="twitch">twitch</option>
+            <option value="twitter">twitter</option>
+            <option value="twoo">twoo</option>
+            <option value="ubuntu">ubuntu</option>
+            <option value="udacity">udacity</option>
+            <option value="viadeo">viadeo</option>
+            <option value="vimeo">vimeo</option>
+            <option value="vine">vine</option>
+            <option value="virb">virb</option>
+            <option value="visa">visa</option>
+            <option value="vk">vk</option>
+            <option value="wechat">wechat</option>
+            <option value="whatsapp">whatsapp</option>
+            <option value="wikipedia">wikipedia</option>
+            <option value="windows">windows</option>
+            <option value="wix">wix</option>
+            <option value="wordpress">wordpress</option>
+            <option value="xbox">xbox</option>
+            <option value="xero">xero</option>
+            <option value="xing">xing</option>
+            <option value="yahoo">yahoo</option>
+            <option value="yammer">yammer</option>
+            <option value="yelp">yelp</option>
+            <option value="youtube">youtube</option>
+            <option value="zapier">zapier</option>
+            <option value="zillow">zillow</option>
+          </select>
+        </div>
+        <div class="Form-inputGroup" data-requires="service:satyr">
+          <label for="flag">flag</label>
+          <!-- <input name="flag" id="flag" type="text" placeholder="usa" value=""> -->
+          <select name="flag" id="flag">
+            <option value="" selected>none</option>
+            <option value="afg">afg (af)</option>
+            <option value="ala">ala (ax)</option>
+            <option value="alb">alb (al)</option>
+            <option value="dza">dza (dz)</option>
+            <option value="asm">asm (as)</option>
+            <option value="and">and (ad)</option>
+            <option value="ago">ago (ao)</option>
+            <option value="aia">aia (ai)</option>
+            <option value="ata">ata (aq)</option>
+            <option value="atg">atg (ag)</option>
+            <option value="arg">arg (ar)</option>
+            <option value="arm">arm (am)</option>
+            <option value="abw">abw (aw)</option>
+            <option value="aus">aus (au)</option>
+            <option value="aut">aut (at)</option>
+            <option value="aze">aze (az)</option>
+            <option value="bhs">bhs (bs)</option>
+            <option value="bhr">bhr (bh)</option>
+            <option value="bgd">bgd (bd)</option>
+            <option value="brb">brb (bb)</option>
+            <option value="blr">blr (by)</option>
+            <option value="bel">bel (be)</option>
+            <option value="blz">blz (bz)</option>
+            <option value="ben">ben (bj)</option>
+            <option value="bmu">bmu (bm)</option>
+            <option value="btn">btn (bt)</option>
+            <option value="bol">bol (bo)</option>
+            <option value="bih">bih (ba)</option>
+            <option value="bwa">bwa (bw)</option>
+            <option value="bra">bra (br)</option>
+            <option value="vgb">vgb (vg)</option>
+            <option value="iot">iot (io)</option>
+            <option value="brn">brn (bn)</option>
+            <option value="bgr">bgr (bg)</option>
+            <option value="bfa">bfa (bf)</option>
+            <option value="bdi">bdi (bi)</option>
+            <option value="khm">khm (kh)</option>
+            <option value="cmr">cmr (cm)</option>
+            <option value="can">can (ca)</option>
+            <option value="cpv">cpv (cv)</option>
+            <option value="caf">caf (cf)</option>
+            <option value="tcd">tcd (td)</option>
+            <option value="chl">chl (cl)</option>
+            <option value="chn">chn (cn)</option>
+            <option value="col">col (co)</option>
+            <option value="com">com (km)</option>
+            <option value="cog">cog (cg)</option>
+            <option value="cod">cod (cd)</option>
+            <option value="cri">cri (cr)</option>
+            <option value="civ">civ (ci)</option>
+            <option value="hrv">hrv (hr)</option>
+            <option value="cub">cub (cu)</option>
+            <option value="cyp">cyp (cy)</option>
+            <option value="cze">cze (cz)</option>
+            <option value="dnk">dnk (dk)</option>
+            <option value="dji">dji (dj)</option>
+            <option value="dma">dma (dm)</option>
+            <option value="dom">dom (do)</option>
+            <option value="ecu">ecu (ec)</option>
+            <option value="egy">egy (eg)</option>
+            <option value="slv">slv (sv)</option>
+            <option value="gnq">gnq (gq)</option>
+            <option value="eri">eri (er)</option>
+            <option value="est">est (ee)</option>
+            <option value="eth">eth (et)</option>
+            <option value="fji">fji (fj)</option>
+            <option value="fin">fin (fi)</option>
+            <option value="fra">fra (fr)</option>
+            <option value="gab">gab (ga)</option>
+            <option value="gmb">gmb (gm)</option>
+            <option value="geo">geo (ge)</option>
+            <option value="deu">deu (de)</option>
+            <option value="gha">gha (gh)</option>
+            <option value="grc">grc (gr)</option>
+            <option value="grd">grd (gd)</option>
+            <option value="gtm">gtm (gt)</option>
+            <option value="gin">gin (gn)</option>
+            <option value="gnb">gnb (gw)</option>
+            <option value="guy">guy (gy)</option>
+            <option value="hti">hti (ht)</option>
+            <option value="hnd">hnd (hn)</option>
+            <option value="hun">hun (hu)</option>
+            <option value="isl">isl (is)</option>
+            <option value="ind">ind (in)</option>
+            <option value="idn">idn (id)</option>
+            <option value="irn">irn (ir)</option>
+            <option value="irq">irq (iq)</option>
+            <option value="irl">irl (ie)</option>
+            <option value="isr">isr (il)</option>
+            <option value="ita">ita (it)</option>
+            <option value="jam">jam (jm)</option>
+            <option value="jpn">jpn (jp)</option>
+            <option value="jor">jor (jo)</option>
+            <option value="kaz">kaz (kz)</option>
+            <option value="ken">ken (ke)</option>
+            <option value="kir">kir (ki)</option>
+            <option value="prk">prk (kp)</option>
+            <option value="kor">kor (kr)</option>
+            <option value="kwt">kwt (kw)</option>
+            <option value="kgz">kgz (kg)</option>
+            <option value="lao">lao (la)</option>
+            <option value="lva">lva (lv)</option>
+            <option value="lbn">lbn (lb)</option>
+            <option value="lso">lso (ls)</option>
+            <option value="lbr">lbr (lr)</option>
+            <option value="lby">lby (ly)</option>
+            <option value="lie">lie (li)</option>
+            <option value="ltu">ltu (lt)</option>
+            <option value="lux">lux (lu)</option>
+            <option value="mkd">mkd (mk)</option>
+            <option value="mdg">mdg (mg)</option>
+            <option value="mwi">mwi (mw)</option>
+            <option value="mys">mys (my)</option>
+            <option value="mdv">mdv (mv)</option>
+            <option value="mli">mli (ml)</option>
+            <option value="mlt">mlt (mt)</option>
+            <option value="mhl">mhl (mh)</option>
+            <option value="mrt">mrt (mr)</option>
+            <option value="mus">mus (mu)</option>
+            <option value="mex">mex (mx)</option>
+            <option value="mda">mda (md)</option>
+            <option value="mco">mco (mc)</option>
+            <option value="mng">mng (mn)</option>
+            <option value="mne">mne (me)</option>
+            <option value="mar">mar (ma)</option>
+            <option value="moz">moz (mz)</option>
+            <option value="mmr">mmr (mm)</option>
+            <option value="nam">nam (na)</option>
+            <option value="nru">nru (nr)</option>
+            <option value="npl">npl (np)</option>
+            <option value="nld">nld (nl)</option>
+            <option value="nzl">nzl (nz)</option>
+            <option value="nic">nic (ni)</option>
+            <option value="ner">ner (ne)</option>
+            <option value="nga">nga (ng)</option>
+            <option value="nor">nor (no)</option>
+            <option value="omn">omn (om)</option>
+            <option value="pak">pak (pk)</option>
+            <option value="plw">plw (pw)</option>
+            <option value="pse">pse (ps)</option>
+            <option value="pan">pan (pa)</option>
+            <option value="png">png (pg)</option>
+            <option value="pry">pry (py)</option>
+            <option value="per">per (pe)</option>
+            <option value="phl">phl (ph)</option>
+            <option value="pol">pol (pl)</option>
+            <option value="prt">prt (pt)</option>
+            <option value="qat">qat (qa)</option>
+            <option value="rou">rou (ro)</option>
+            <option value="rus">rus (ru)</option>
+            <option value="rwa">rwa (rw)</option>
+            <option value="kna">kna (kn)</option>
+            <option value="lca">lca (lc)</option>
+            <option value="vct">vct (vc)</option>
+            <option value="wsm">wsm (ws)</option>
+            <option value="smr">smr (sm)</option>
+            <option value="sau">sau (sa)</option>
+            <option value="sen">sen (sn)</option>
+            <option value="srb">srb (rs)</option>
+            <option value="syc">syc (sc)</option>
+            <option value="sle">sle (sl)</option>
+            <option value="sgp">sgp (sg)</option>
+            <option value="svk">svk (sk)</option>
+            <option value="svn">svn (si)</option>
+            <option value="slb">slb (sb)</option>
+            <option value="som">som (so)</option>
+            <option value="zaf">zaf (za)</option>
+            <option value="ssd">ssd (ss)</option>
+            <option value="esp">esp (es)</option>
+            <option value="lka">lka (lk)</option>
+            <option value="sdn">sdn (sd)</option>
+            <option value="sur">sur (sr)</option>
+            <option value="swz">swz (sz)</option>
+            <option value="swe">swe (se)</option>
+            <option value="che">che (ch)</option>
+            <option value="syr">syr (sy)</option>
+            <option value="tjk">tjk (tj)</option>
+            <option value="tza">tza (tz)</option>
+            <option value="tha">tha (th)</option>
+            <option value="tls">tls (tl)</option>
+            <option value="tgo">tgo (tg)</option>
+            <option value="ton">ton (to)</option>
+            <option value="tto">tto (tt)</option>
+            <option value="tun">tun (tn)</option>
+            <option value="tur">tur (tr)</option>
+            <option value="tkm">tkm (tm)</option>
+            <option value="tuv">tuv (tv)</option>
+            <option value="twn">twn (tw)</option>
+            <option value="uga">uga (ug)</option>
+            <option value="ukr">ukr (ua)</option>
+            <option value="are">are (ae)</option>
+            <option value="gbr">gbr (gb)</option>
+            <option value="usa">usa (us)</option>
+            <option value="ury">ury (uy)</option>
+            <option value="uzb">uzb (uz)</option>
+            <option value="vut">vut (vu)</option>
+            <option value="ven">ven (ve)</option>
+            <option value="vnm">vnm (vn)</option>
+            <option value="yem">yem (ye)</option>
+            <option value="zmb">zmb (zm)</option>
+            <option value="zwe">zwe (zw)</option>
+          </select>
+        </div>
+        <div class="Form-inputGroup" data-requires="service:satyr">
+          <label for="texture">texture</label>
+          <select name="texture" id="format">
+            <option value="" selected>none</option>
+            <option value="cross">cross</option>
+            <option value="graphpaper">graphpaper</option>
+          </select>
+        </div>
+
         <div class="Form-footer">
           <small>* indicates required</small><br>
           <button class="Form-button Button -large" type="submit">Update</button>
+          <div class="AutoUpdate">
+            <input class="AutoUpdate-input" type="checkbox" name="auto_update" id="auto_update">
+            <label class="AutoUpdate-label" for="auto_update">Auto update</label>
+          </div>
         </div>
       </form>
       <div>
@@ -167,10 +596,19 @@
 
         <div class="Example">
           <img id="img11" src="" alt="">
-          <p>Custom Source <small>(placekitten)</small></p>
+          <p>Satyr Source</p>
         </div>
         <div class="Example">
           <img id="img12" src="" sizes="(min-width: 500px) 300px, 100vw" alt="">
+          <p>Satyr Srcset</p>
+        </div>
+
+        <div class="Example">
+          <img id="img13" src="" alt="">
+          <p>Custom Source <small>(placekitten)</small></p>
+        </div>
+        <div class="Example">
+          <img id="img14" src="" sizes="(min-width: 500px) 300px, 100vw" alt="">
           <p>Custom Srcset <small>(placekitten)</small></p>
         </div>
       </div>
