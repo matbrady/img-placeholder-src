@@ -110,6 +110,10 @@ Each service supports different placeholder variations. An image data object tha
 |`format`      | *string*    | *Optional.* Image format (gif, jpeg, jpg, png)
 |`text`        | *string*    | *Optional.* Text displayed in the image
 |`category`    | *string*    | *Optional.* Image category provided by service
+|`delay`       | *integer*   | *Optional.* Response delay from server
+|`brand`       | *string*    | *Optional.* Brand image
+|`flag`        | *string*    | *Optional.* Flag image
+|`texture`     | *string*    | *Optional.* Texture applied to backgrounds
 
 
 ## API
@@ -207,6 +211,7 @@ By default, these services are supported with no extra configuration. New servic
 - [fillmurray](http://www.fillmurray.com/)
 - [placecage](http://www.placecage.com/)
 - [lorempixel](http://lorempixel.com/)
+- [satyr](http://satyr.io/)
 
 ## Why
 
