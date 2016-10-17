@@ -1,6 +1,6 @@
 # img-placeholder-src
 
-> helper for using structured data to populate various image placeholder sources. `17kb/6kb`
+> helper for using structured data to populate various image placeholder sources. `18kb/6kb`
 
 [![Build Status](https://travis-ci.org/matbrady/img-placeholder-src.svg?branch=master)](https://travis-ci.org/matbrady/img-placeholder-src) [![npm version](https://badge.fury.io/js/img-placeholder-src.svg?v=3.0.0)](https://badge.fury.io/js/img-placeholder-src)
 
