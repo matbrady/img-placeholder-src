@@ -124,7 +124,7 @@ var IPS = require('img-placeholder-src');
 var ips = new IPS({
   serviceOverride: null,  // override service name          ex: 'placecage'
   service: 'placeholdit', // default service name           ex: 'fillmurray'
-  protocol: null          // protocol prepended to src url  ex: 'https:'
+  protocol: null          // protocol prepended to src url  ex: 'https'
 });
 ```
 
