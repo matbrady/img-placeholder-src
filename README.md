@@ -261,7 +261,7 @@ Node 0.10+ via [TravisCI](https://travis-ci.org/matbrady/img-placeholder-src)
 
 ## Changelog
 
-Chackout the [Github release feed](https://github.com/matbrady/img-placeholder-src/releases)
+Checkout the [Github release feed](https://github.com/matbrady/img-placeholder-src/releases)
 
 ## Todo
 
