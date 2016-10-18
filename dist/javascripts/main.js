@@ -7,26 +7,47 @@
    */
   var FormModel = Backbone.Model.extend({
     defaults: {
-      service: "placeholdit",
-      height: 100,
-      width: 100,
-      filter: "",
+      auto_update: false,
+      service:    "placeholdit",
+      height:     100,
+      width:      100,
+      filter:     "",
       foreground: "",
       background: "",
-      format: "",
-      text: "",
-      category: ""
+      format:     "",
+      text:       "",
+      category:   "",
+      delay:      0,
+      brand:      "",
+      flag:       "",
+      textture:   ""
     }
   });
 
   var FormView = Backbone.View.extend({
     initialize: function() {
-      this.$inputs = this.$('input, select');
+      this.$inputs = this.$('input, select').not('[name="auto_update"]');
+      this.$dependentFields = this.$('[data-requires]');
       this.$srcText = this.$('#formImageSrc');
+
       this.handleSubmit();
     },
+
     events: {
-      'click button[type="submit"]': 'handleSubmit'
+      'click button[type="submit"]':      'handleSubmit',
+      'change select[name="service"]':    'handleServiceChange',
+      'change input,select':              'handleInputChange',
+      'change input[name="auto_update"]': 'toggleAutoUpdate'
+    },
+
+    handleServiceChange: function(evt) {
+      var $target = $(evt.target);
+      var service = $target.val();
+
+      this.$dependentFields
+        .fadeOut()
+        .filter('[data-requires^="service:' + service + '"]')
+          .fadeIn();
     },
 
     handleSubmit: function(evt) {
@@ -40,7 +61,20 @@
           _this.model.set(name, value)
         }
       });
+      console.log(this.model.attributes);
       vent.trigger('image:update', this.model.attributes);
+    },
+
+    handleInputChange: _.debounce(function(evt) {
+      if (this.model.get('auto_update')) {
+        this.handleSubmit();
+      }
+    }, 400),
+
+    toggleAutoUpdate: function(evt) {
+      var $target = $(evt.target);
+      var checked = $target.is(':checked');
+      this.model.set('auto_update', checked);
     }
   });
 
@@ -64,7 +98,7 @@
       this.$image
         .addClass('loading')
         .attr('src', 'images/loading.gif');
-      console.log(src);
+      // console.log(src);
 
       var img = $("<img />").attr('src', src)
         .on('load', function() {
@@ -80,7 +114,6 @@
     model: new FormModel(),
     el: $('#form')
   });
-
 
   /**
    * Examples
@@ -165,6 +198,19 @@
   img10.setAttribute('src', src);
   img10.setAttribute('srcset', srcset);
 
+  // Satyr Source
+  src = ips.src(imageData, 'satyr');
+  var img11 = document.getElementById("img11");
+  console.log(src);
+  img11.setAttribute('src', src);
+
+  // Satyr Srcset
+  srcset = ips.srcset(srcsetData, 'satyr');
+  var img12 = document.getElementById("img12");
+  console.log(srcset);
+  img12.setAttribute('src', src);
+  img12.setAttribute('srcset', srcset);
+
   // Register a new placeholder service
   ips.register({
     name: 'placekitten',
@@ -180,16 +226,16 @@
   });
   // Custom Source Placekitten
   src = ips.src(imageData, 'placekitten');
-  var img11 = document.getElementById("img11");
+  var img13 = document.getElementById("img13");
   console.log(src);
-  img11.setAttribute('src', src);
+  img13.setAttribute('src', src);
 
   // Custom Srcset Placekitten
   srcset = ips.srcset(srcsetData, 'placekitten');
-  var img12 = document.getElementById("img12");
+  var img14 = document.getElementById("img14");
   console.log(srcset);
-  img12.setAttribute('src', src);
-  img12.setAttribute('srcset', srcset);
+  img14.setAttribute('src', src);
+  img14.setAttribute('srcset', srcset);
 
   // Unique Image
   var data = [

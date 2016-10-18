@@ -16,7 +16,7 @@
     "deploy": "git subtree push --prefix dist origin gh-pages"
   },
   "engine": {
-    "node": ">=0.10 <6.0"
+    "node": ">=0.10 <6.7"
   },
   "repository": {
     "type": "git",
@@ -31,7 +31,8 @@
     "placecage",
     "placeimg",
     "lorempixel",
-    "responsive"
+    "responsive",
+    "satyr.io"
   ],
   "author": "Mat Brady",
   "licenses": [

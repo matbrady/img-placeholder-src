@@ -1,6 +1,6 @@
 # img-placeholder-src
 
-> helper for using structured data to populate various image placeholder sources. `17kb/6kb`
+> helper for using structured data to populate various image placeholder sources. `18kb/6kb`
 
 [![Build Status](https://travis-ci.org/matbrady/img-placeholder-src.svg?branch=master)](https://travis-ci.org/matbrady/img-placeholder-src) [![npm version](https://badge.fury.io/js/img-placeholder-src.svg?v=3.0.0)](https://badge.fury.io/js/img-placeholder-src)
 
@@ -12,6 +12,7 @@
 - [Usage](#usage)
  - [Node](#node)
  - [Browser](#browser)
+- [Configure](#configure)
 - [API](#api)
 - [Placeholder Image Services](#services)
 - [Why?](#why)
@@ -110,7 +111,22 @@ Each service supports different placeholder variations. An image data object tha
 |`format`      | *string*    | *Optional.* Image format (gif, jpeg, jpg, png)
 |`text`        | *string*    | *Optional.* Text displayed in the image
 |`category`    | *string*    | *Optional.* Image category provided by service
+|`delay`       | *integer*   | *Optional.* Response delay from server
+|`brand`       | *string*    | *Optional.* Brand image
+|`flag`        | *string*    | *Optional.* Flag image
+|`texture`     | *string*    | *Optional.* Texture applied to backgrounds
 
+## Configure
+
+There are several settings that can be applied to the IPS configuration. They include:
+``` js
+var IPS = require('img-placeholder-src');
+var ips = new IPS({
+  serviceOverride: null,  // override service name          ex: 'placecage'
+  service: 'placeholdit', // default service name           ex: 'fillmurray'
+  protocol: null          // protocol prepended to src url  ex: 'https:'
+});
+```
 
 ## API
 
@@ -207,6 +223,7 @@ By default, these services are supported with no extra configuration. New servic
 - [fillmurray](http://www.fillmurray.com/)
 - [placecage](http://www.placecage.com/)
 - [lorempixel](http://lorempixel.com/)
+- [satyr](http://satyr.io/)
 
 ## Why
 
@@ -223,6 +240,7 @@ As developers, we should always be testing and optimizing our code to be as effi
 `npm run watch` - runs the wepack build and mocha tests. Watches for new changes  
 `npm run build:dev` - runs the wepack build  
 `npm run dev` - runs the webpack build and tests the application for errors.
+`npm run build` - builds various versions of the script to be used on the demo site and by browser
 
 ##### Update Example Page
 pushes current checked out branch to the remote github-pages (`gh-pages`) branch

@@ -75,6 +75,10 @@ code {
   padding: 0px 3px;
 }
 
+p code {
+  margin: 0;
+}
+
 code.-large {
   padding: 10px 15px;
 }
@@ -171,6 +175,10 @@ code.-dark {
   float: left;
   padding-left: 30px;
   width: 100%;
+}
+
+[data-requires] {
+  display: none;
 }
 
 @media (min-width: 400px) and (max-width: 599px) {
@@ -282,3 +290,14 @@ code.-dark {
   margin: 10px 0;
   text-align: center;
 }
+
+.AutoUpdate {
+  margin: 5px 0;
+}
+
+.AutoUpdate-label {
+  display: inline;
+  margin: 0;
+}
+
+.AutoUpdate-input {}

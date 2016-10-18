@@ -167,7 +167,55 @@ var services = {
       }
       return data;
     }
-  }
+  },
+
+  /**
+   * satyr.io Service - https://satyr.io
+   * Supports: custom text
+   * @type {Object}
+   */
+  satyr: {
+    name: 'satyr',
+    render: function(args) {
+      const { protocol, width, height, background, theme, format, text, delay, brand } = args;
+      const params = ['format', 'text', 'delay', 'brand', 'flag', 'texture'];
+      let result = "";
+
+      result = `${ typeof(protocol) !== 'undefined' ? protocol : ""}`
+        + `//satyr.io/${width}x${height}`
+        + `${ typeof(background) !== 'undefined' ? '/'+background     : ""}`
+        + `${ typeof(theme)      !== 'undefined' ? '/'+theme          : ""}`;
+
+        // check for any parameter variables and set flag
+        let count = 1;
+        params.forEach(function(param, index) {
+          if (args.hasOwnProperty(param)) {
+            let value = args[param];
+            // change `format` to `type`
+            if (param === 'format') {
+              param = 'type';
+            }
+            result += `${(count <= 1 ? '?' : '&')}${param}=${value}`
+            count++
+          }
+        })
+
+      return result;
+    },
+    modifier: function(data, options) {
+      // Only accept [webp, png, gif, jpg, jpeg] formats
+      var formats = ['webp', 'png', 'gif', 'jpg', 'jpeg'];
+      if (!!data.text) {
+        data['text'] = data.text.replace(" ", "+");
+      }
+      if (!!data.format) {
+        if (formats.indexOf(data.format) === -1) { // indexOf support: ie9
+          data.format = undefined;
+        }
+      }
+      return data;
+    }
+  },
 };
 
 module.exports = services;
