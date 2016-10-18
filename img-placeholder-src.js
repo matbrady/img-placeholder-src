@@ -385,6 +385,61 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	      return data;
 	    }
+	  },
+
+	  /**
+	   * satyr.io Service - https://satyr.io
+	   * Supports: custom text
+	   * @type {Object}
+	   */
+	  satyr: {
+	    name: 'satyr',
+	    render: function render(args) {
+	      var protocol = args.protocol;
+	      var width = args.width;
+	      var height = args.height;
+	      var background = args.background;
+	      var theme = args.theme;
+	      var format = args.format;
+	      var text = args.text;
+	      var delay = args.delay;
+	      var brand = args.brand;
+
+	      var params = ['format', 'text', 'delay', 'brand', 'flag', 'texture'];
+	      var result = "";
+
+	      result = '' + (typeof protocol !== 'undefined' ? protocol : "") + ('//satyr.io/' + width + 'x' + height) + ('' + (typeof background !== 'undefined' ? '/' + background : "")) + ('' + (typeof theme !== 'undefined' ? '/' + theme : ""));
+
+	      // check for any parameter variables and set flag
+	      var count = 1;
+	      params.forEach(function (param, index) {
+	        if (args.hasOwnProperty(param)) {
+	          var value = args[param];
+	          // change `format` to `type`
+	          if (param === 'format') {
+	            param = 'type';
+	          }
+	          result += '' + (count <= 1 ? '?' : '&') + param + '=' + value;
+	          count++;
+	        }
+	      });
+
+	      return result;
+	    },
+	    modifier: function modifier(data, options) {
+	      // Only accept [webp, png, gif, jpg, jpeg] formats
+	      var formats = ['webp', 'png', 'gif', 'jpg', 'jpeg'];
+	      if (!!data.text) {
+	        data['text'] = data.text.replace(" ", "+");
+	      }
+	      if (!!data.format) {
+	        if (formats.indexOf(data.format) === -1) {
+	          // indexOf support: ie9
+	          data.format = undefined;
+	        }
+	      }
+	      return data;
+	    }
 	  }
 	};
 
