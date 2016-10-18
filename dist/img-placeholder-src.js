@@ -75,7 +75,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var ImagePlaceholderSrc = function () {
 	  function ImagePlaceholderSrc() {
-	    var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
 	    _classCallCheck(this, ImagePlaceholderSrc);
 
@@ -141,7 +141,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'srcset',
 	    value: function srcset(data, serviceName) {
-	      var options = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+	      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
 	      var config = void 0;
 	      var service = void 0;
@@ -502,7 +502,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: function srcset(data) {
 	      var _this = this;
 
-	      var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
 	      var sources = [];
 
@@ -536,7 +536,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'src',
 	    value: function src(data) {
-	      var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	      // service:string, options:object
 	      var config;
 	      var template;
