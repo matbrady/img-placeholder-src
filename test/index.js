@@ -219,7 +219,44 @@ describe('img-placeholder-src', function() {
         ips = null;
       });
 
-      it('should generate a placeimg src since serviceOverride was set: ' + results.placeimg.src, function() {
+      it('should generate a placeimg src since the `serviceOverride` setting was set: ' + results.placeimg.src, function() {
+        ips.src(testData.all.src).should.equal(results.placeimg.src);
+      });
+
+    });
+
+    context('with default service setting and override', function() {
+
+      before(function(){
+        ips = new IPS({
+          serviceOverride: 'fillmurray',
+          service: 'placeimg'
+        });
+      });
+
+      after(function() {
+        ips = null;
+      });
+
+      it('should generate a fillmurray src since the `service` setting was set: ' + results.fillmurray.src, function() {
+        ips.src(testData.all.src).should.equal(results.fillmurray.src);
+      });
+
+    });
+
+    context('with default service setting ', function() {
+
+      before(function(){
+        ips = new IPS({
+          service: 'placeimg'
+        });
+      });
+
+      after(function() {
+        ips = null;
+      });
+
+      it('should generate a placeimg src since the `service` setting was set: ' + results.placeimg.src, function() {
         ips.src(testData.all.src).should.equal(results.placeimg.src);
       });
 

@@ -12,6 +12,7 @@
 - [Usage](#usage)
  - [Node](#node)
  - [Browser](#browser)
+- [Configure](#configure)
 - [API](#api)
 - [Placeholder Image Services](#services)
 - [Why?](#why)
@@ -115,6 +116,17 @@ Each service supports different placeholder variations. An image data object tha
 |`flag`        | *string*    | *Optional.* Flag image
 |`texture`     | *string*    | *Optional.* Texture applied to backgrounds
 
+## Configure
+
+There are several settings that can be applied to the IPS configuration. They include:
+``` js
+var IPS = require('img-placeholder-src');
+var ips = new IPS({
+  serviceOverride: null,  // override service name          ex: 'placecage'
+  service: 'placeholdit', // default service name           ex: 'fillmurray'
+  protocol: null          // protocol prepended to src url  ex: 'https:'
+});
+```
 
 ## API
 
@@ -228,6 +240,7 @@ As developers, we should always be testing and optimizing our code to be as effi
 `npm run watch` - runs the wepack build and mocha tests. Watches for new changes  
 `npm run build:dev` - runs the wepack build  
 `npm run dev` - runs the webpack build and tests the application for errors.
+`npm run build` - builds various versions of the script to be used on the demo site and by browser
 
 ##### Update Example Page
 pushes current checked out branch to the remote github-pages (`gh-pages`) branch
