@@ -98,8 +98,7 @@ Download the bundled script file [`img-placeholder-src.bundle.js`](https://githu
 </body>
 ```
 
-Each service supports different placeholder variations. An image data object that contains all types of image variations could include the following attributes.
-
+Each service supports different placeholder variations. See [`service_features.md`](docs/service_features.md) for details. An image data object that contains all types of image variations could include the following attributes.
 
 |Attribute     | Options     | Description
 |:---          |:---         |:---
