@@ -41,7 +41,7 @@ var imageData = {
 var src = ips.src(imageData, 'placeholdit');
 console.log(src);
 /*
-http://placehold.it/100x100
+http://www.placehold.it/100x100
 */
 ```
 
@@ -63,7 +63,7 @@ var srcsetData = [
 var srcset = ips.srcset(srcsetData, 'placeholdit');
 console.log(srcset);
 /*
-http://placehold.it/100x100 100w, http://placehold.it/200x200 200w
+http://www.placehold.it/100x100 100w, http://www.placehold.it/200x200 200w
 */
 ```
 
