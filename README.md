@@ -10,8 +10,8 @@
 
 - [Install](#install)
 - [Usage](#usage)
- - [Node](#node)
- - [Browser](#browser)
+- [Node](#node)
+- [Browser](#browser)
 - [Configure](#configure)
 - [API](#api)
 - [Placeholder Image Services](#services)
@@ -31,7 +31,7 @@ npm install img-placeholder-src --save
 
 ```js
 var IPS = require('img-placeholder-src');
-var ips = new IPS;
+var ips = new IPS();
 
 var imageData = {
   height: 100,
@@ -47,7 +47,7 @@ http://placehold.it/100x100
 
 ```js
 var IPS = require('img-placeholder-src');
-var ips = new IPS;
+var ips = new IPS();
 
 var srcsetData = [
   {
@@ -100,30 +100,31 @@ Download the bundled script file [`img-placeholder-src.bundle.js`](https://githu
 
 Each service supports different placeholder variations. See [`service_features.md`](docs/service_features.md) for details. An image data object that contains all types of image variations could include the following attributes.
 
-|Attribute     | Options     | Description
-|:---          |:---         |:---
-|`width`       | *integer*   | Width of the image
-|`height`      | *integer*   | Height of the image
-|`filter`      | *string*    | *Optional.* Image filter (provided by service)
-|`foreground`  | *string*    | *Optional.* Image foreground/text color
-|`background`  | *string*    | *Optional.* Image background color
-|`format`      | *string*    | *Optional.* Image format (gif, jpeg, jpg, png)
-|`text`        | *string*    | *Optional.* Text displayed in the image
-|`category`    | *string*    | *Optional.* Image category provided by service
-|`delay`       | *integer*   | *Optional.* Response delay from server
-|`brand`       | *string*    | *Optional.* Brand image
-|`flag`        | *string*    | *Optional.* Flag image
-|`texture`     | *string*    | *Optional.* Texture applied to backgrounds
+| Attribute    | Options   | Description                                    |
+| :----------- | :-------- | :--------------------------------------------- |
+| `width`      | _integer_ | Width of the image                             |
+| `height`     | _integer_ | Height of the image                            |
+| `filter`     | _string_  | _Optional._ Image filter (provided by service) |
+| `foreground` | _string_  | _Optional._ Image foreground/text color        |
+| `background` | _string_  | _Optional._ Image background color             |
+| `format`     | _string_  | _Optional._ Image format (gif, jpeg, jpg, png) |
+| `text`       | _string_  | _Optional._ Text displayed in the image        |
+| `category`   | _string_  | _Optional._ Image category provided by service |
+| `delay`      | _integer_ | _Optional._ Response delay from server         |
+| `brand`      | _string_  | _Optional._ Brand image                        |
+| `flag`       | _string_  | _Optional._ Flag image                         |
+| `texture`    | _string_  | _Optional._ Texture applied to backgrounds     |
 
 ## Configure
 
 There are several settings that can be applied to the IPS configuration. They include:
-``` js
+
+```js
 var IPS = require('img-placeholder-src');
 var ips = new IPS({
-  serviceOverride: null,  // override service name          ex: 'placecage'
+  serviceOverride: null, // override service name          ex: 'placecage'
   service: 'placeholdit', // default service name           ex: 'fillmurray'
-  protocol: null          // protocol prepended to src url  ex: 'https'
+  protocol: null // protocol prepended to src url  ex: 'https'
 });
 ```
 
@@ -157,20 +158,25 @@ Accepts an array of image data objects and returns a string of comma seperated s
 
 Registers a new image service function.
 
-Attribute     | Options     | Description
----           | ---         | ---
-`name`        | *string*    | Name of registered placeholder service
-`render`    | *function*  | `[data]` accepts settings that will populate the image source string which it returns. A template compile function could be used here.
-`modifier`    | *function*  | *Optional.* Additional logic to modify data passed to the image template. Accepts a data object and **must:** return the modifed data object.
+| Attribute  | Options    | Description                                                                                                                                   |
+| ---------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`     | _string_   | Name of registered placeholder service                                                                                                        |
+| `render`   | _function_ | `[data]` accepts settings that will populate the image source string which it returns. A template compile function could be used here.        |
+| `modifier` | _function_ | _Optional._ Additional logic to modify data passed to the image template. Accepts a data object and **must:** return the modifed data object. |
 
 ```js
 ips.register({
   name: 'placekitten',
   render: function(args) {
-    return (typeof(args.protocol) !== 'undefined' ? args.protocol : "")
-      + '//placekitten.com'
-      + (typeof(args.filter) !== 'undefined' ? '/'+args.filter : "")
-      + '/' + args.width + '/' + args.width;
+    return (
+      (typeof args.protocol !== 'undefined' ? args.protocol : '') +
+      '//placekitten.com' +
+      (typeof args.filter !== 'undefined' ? '/' + args.filter : '') +
+      '/' +
+      args.width +
+      '/' +
+      args.width
+    );
   },
   modifier: function(data) {
     return data;
@@ -190,6 +196,7 @@ console.log(src);
 //placekitten.com/g/100x100
 */
 ```
+
 see [`services.es6.js`](https://github.com/matbrady/img-placeholder-src/tree/master/src/services.es6.js) for modifier example
 
 ## API - Services
@@ -204,7 +211,7 @@ var ips = new IPS({
 ```
 
 ```js
-<img src="{{ ips.src(data, 'placeholdit') }}"/>
+<img src="{{ ips.src(data, 'placeholdit') }}" />
 ```
 
 If `serviceOverride` is set, all image sources would be replaced with `fillmurray` sources rather than `placeholdit`. This allows for quickly changing image sources.
@@ -215,7 +222,7 @@ If `serviceOverride` is set, all image sources would be replaced with `fillmurra
 
 ## Services
 
-By default, these services are supported with no extra configuration. New services can be added by passing a `serviceData` object to the `ips.register` function. See the [API](#register) for reference
+By default, these services are supported with no extra configuration. New services can be added by passing a `serviceData` object to the `ips.register` function. See the [API](#registerservicedata) for reference
 
 - [placeholdit](http://placehold.it/)
 - [placeimg](https://placeimg.com/)
@@ -242,7 +249,9 @@ As developers, we should always be testing and optimizing our code to be as effi
 `npm run build` - builds various versions of the script to be used on the demo site and by browser
 
 ##### Update Example Page
+
 pushes current checked out branch to the remote github-pages (`gh-pages`) branch
+
 ```
 npm run deploy
 ```
@@ -254,7 +263,7 @@ Latest Safari
 Latest Firefox  
 Latest Mobile Safari  
 IE 9+  
-Node 0.10+ via [TravisCI](https://travis-ci.org/matbrady/img-placeholder-src)  
+Node 0.10+ via [TravisCI](https://travis-ci.org/matbrady/img-placeholder-src)
 
 [MIT](http://opensource.org/licenses/MIT) © [Mat Brady](https://github.com/matbrady)
 
@@ -270,7 +279,7 @@ Checkout the [Github release feed](https://github.com/matbrady/img-placeholder-s
 - [x] https support
 - [x] es6 re-write
 - [x] browser support
- - [x] remove extraneous dependencies
- - [x] create distribution package using webpack
+- [x] remove extraneous dependencies
+- [x] create distribution package using webpack
 - [x] add global service override function
 - [x] support incrementing source size for custom registered services
