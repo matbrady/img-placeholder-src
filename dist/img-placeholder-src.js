@@ -52,7 +52,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -197,20 +197,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = ImagePlaceholderSrc;
 
-/***/ },
+/***/ }),
 /* 1 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = require("core-js/fn/object/assign");
 
-/***/ },
+/***/ }),
 /* 2 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	'use strict';
 
 	var services = {
-
 	  /**
 	   * Placehold.it Service - http://placehold.it/
 	   * Supports: custom text
@@ -219,20 +218,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	  placeholdit: {
 	    name: 'placeholdit',
 	    render: function render(args) {
-	      var protocol = args.protocol;
-	      var width = args.width;
-	      var height = args.height;
-	      var background = args.background;
-	      var foreground = args.foreground;
-	      var format = args.format;
-	      var text = args.text;
+	      var protocol = args.protocol,
+	          width = args.width,
+	          height = args.height,
+	          background = args.background,
+	          foreground = args.foreground,
+	          format = args.format,
+	          text = args.text;
 
-	      return '' + (typeof protocol !== 'undefined' ? protocol : "") + ('//placehold.it/' + width + 'x' + height) + ('' + (typeof background !== 'undefined' ? '/' + background : "")) + ('' + (typeof foreground !== 'undefined' ? '/' + foreground : "")) + ('' + (typeof format !== 'undefined' ? '.' + format : "")) + ('' + (typeof text !== 'undefined' && typeof format === 'undefined' ? '?text=' + text : ""));
+	      return '' + (typeof protocol !== 'undefined' ? protocol : '') + ('//www.placehold.it/' + width + 'x' + height) + ('' + (typeof background !== 'undefined' ? '/' + background : '')) + ('' + (typeof foreground !== 'undefined' ? '/' + foreground : '')) + ('' + (typeof format !== 'undefined' ? '.' + format : '')) + ('' + (typeof text !== 'undefined' && typeof format === 'undefined' ? '?text=' + text : ''));
 	    },
 	    modifier: function modifier(data, options) {
 	      var formats = ['png', 'gif', 'jpg', 'jpeg'];
 	      if (!!data.text) {
-	        data['text'] = data.text.replace(" ", "+");
+	        data['text'] = data.text.replace(' ', '+');
 	      }
 	      // Only accept [png, gif, jpg, jpeg] formats
 	      if (!!data.format) {
@@ -253,18 +252,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	  lorempixel: {
 	    name: 'lorempixel',
 	    render: function render(args) {
-	      var protocol = args.protocol;
-	      var filter = args.filter;
-	      var width = args.width;
-	      var height = args.height;
-	      var category = args.category;
-	      var text = args.text;
+	      var protocol = args.protocol,
+	          filter = args.filter,
+	          width = args.width,
+	          height = args.height,
+	          category = args.category,
+	          text = args.text;
 
-	      return '' + (typeof protocol !== 'undefined' ? protocol : "") + '//lorempixel.com' + ('' + (typeof filter !== 'undefined' ? '/' + filter : "")) + ('/' + width + '/' + height) + ('' + (typeof category !== 'undefined' ? '/' + category : "")) + ('' + (typeof text !== 'undefined' && typeof category !== 'undefined' ? '/' + text : ""));
+	      return '' + (typeof protocol !== 'undefined' ? protocol : '') + '//www.lorempixel.com' + ('' + (typeof filter !== 'undefined' ? '/' + filter : '')) + ('/' + width + '/' + height) + ('' + (typeof category !== 'undefined' ? '/' + category : '')) + ('' + (typeof text !== 'undefined' && typeof category !== 'undefined' ? '/' + text : ''));
 	    },
 	    modifier: function modifier(data, options) {
 	      if (!!data.text) {
-	        data['text'] = data.text.replace(" ", "-");
+	        data['text'] = data.text.replace(' ', '-');
 	      }
 	      if (!!data.filter) {
 	        switch (data.filter) {
@@ -285,13 +284,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  placeimg: {
 	    name: 'placeimg',
 	    render: function render(args) {
-	      var protocol = args.protocol;
-	      var width = args.width;
-	      var height = args.height;
-	      var category = args.category;
-	      var filter = args.filter;
+	      var protocol = args.protocol,
+	          width = args.width,
+	          height = args.height,
+	          category = args.category,
+	          filter = args.filter;
 
-	      return '' + (typeof protocol !== 'undefined' ? protocol : "") + ('//placeimg.com/' + width + '/' + height) + ('' + (typeof category !== 'undefined' ? '/' + category : "")) + ('' + (typeof filter !== 'undefined' ? '/' + filter : ""));
+	      return '' + (typeof protocol !== 'undefined' ? protocol : '') + ('//www.placeimg.com/' + width + '/' + height) + ('' + (typeof category !== 'undefined' ? '/' + category : '')) + ('' + (typeof filter !== 'undefined' ? '/' + filter : ''));
 	    },
 	    modifier: function modifier(data, options) {
 	      var filters = ['greyscale', 'grayscale', 'sepia'];
@@ -324,13 +323,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  placecage: {
 	    name: 'placecage',
 	    render: function render(args) {
-	      var protocol = args.protocol;
-	      var width = args.width;
-	      var height = args.height;
-	      var filter = args.filter;
-	      var format = args.format;
+	      var protocol = args.protocol,
+	          width = args.width,
+	          height = args.height,
+	          filter = args.filter,
+	          format = args.format;
 
-	      return '' + (typeof protocol !== 'undefined' ? protocol : "") + '//placecage.com' + ('' + (typeof format !== 'undefined' ? '/' + format : "")) + ('' + (typeof filter !== 'undefined' && typeof format === 'undefined' ? '/' + filter : "")) + ('/' + width + '/' + height);
+	      return '' + (typeof protocol !== 'undefined' ? protocol : '') + '//www.placecage.com' + ('' + (typeof format !== 'undefined' ? '/' + format : '')) + ('' + (typeof filter !== 'undefined' && typeof format === 'undefined' ? '/' + filter : '')) + ('/' + width + '/' + height);
 	    },
 	    modifier: function modifier(data, options) {
 	      var formats = ['gif'];
@@ -365,12 +364,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  fillmurray: {
 	    name: 'fillmurray',
 	    render: function render(args) {
-	      var protocol = args.protocol;
-	      var width = args.width;
-	      var height = args.height;
-	      var filter = args.filter;
+	      var protocol = args.protocol,
+	          width = args.width,
+	          height = args.height,
+	          filter = args.filter;
 
-	      return '' + (typeof protocol !== 'undefined' ? protocol : "") + '//fillmurray.com' + ('' + (typeof filter !== 'undefined' ? '/' + filter : "")) + ('/' + width + '/' + height);
+	      return '' + (typeof protocol !== 'undefined' ? protocol : '') + '//www.fillmurray.com' + ('' + (typeof filter !== 'undefined' ? '/' + filter : '')) + ('/' + width + '/' + height);
 	    },
 	    modifier: function modifier(data, options) {
 	      if (!!data.filter) {
@@ -395,20 +394,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	  satyr: {
 	    name: 'satyr',
 	    render: function render(args) {
-	      var protocol = args.protocol;
-	      var width = args.width;
-	      var height = args.height;
-	      var background = args.background;
-	      var theme = args.theme;
-	      var format = args.format;
-	      var text = args.text;
-	      var delay = args.delay;
-	      var brand = args.brand;
+	      var protocol = args.protocol,
+	          width = args.width,
+	          height = args.height,
+	          background = args.background,
+	          theme = args.theme,
+	          format = args.format,
+	          text = args.text,
+	          delay = args.delay,
+	          brand = args.brand;
 
 	      var params = ['format', 'text', 'delay', 'brand', 'flag', 'texture'];
-	      var result = "";
+	      var result = '';
 
-	      result = '' + (typeof protocol !== 'undefined' ? protocol : "") + ('//satyr.io/' + width + 'x' + height) + ('' + (typeof background !== 'undefined' ? '/' + background : "")) + ('' + (typeof theme !== 'undefined' ? '/' + theme : ""));
+	      result = '' + (typeof protocol !== 'undefined' ? protocol : '') + ('//www.satyr.io/' + width + 'x' + height) + ('' + (typeof background !== 'undefined' ? '/' + background : '')) + ('' + (typeof theme !== 'undefined' ? '/' + theme : ''));
 
 	      // check for any parameter variables and set flag
 	      var count = 1;
@@ -430,7 +429,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // Only accept [webp, png, gif, jpg, jpeg] formats
 	      var formats = ['webp', 'png', 'gif', 'jpg', 'jpeg'];
 	      if (!!data.text) {
-	        data['text'] = data.text.replace(" ", "+");
+	        data['text'] = data.text.replace(' ', '+');
 	      }
 	      if (!!data.format) {
 	        if (formats.indexOf(data.format) === -1) {
@@ -445,9 +444,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = services;
 
-/***/ },
+/***/ }),
 /* 3 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -572,13 +571,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = Service;
 
-/***/ },
+/***/ }),
 /* 4 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = require("srcset");
 
-/***/ }
+/***/ })
 /******/ ])
 });
 ;
