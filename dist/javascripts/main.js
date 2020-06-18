@@ -186,13 +186,18 @@
   img8.setAttribute('srcset', srcset);
 
   // Placeimg Source
-  src = ips.src(imageData, 'placeimg');
+  var ipsOverride = new IPS({
+    protocol: 'https'
+  });
+  src = ipsOverride.src(imageData, 'placeimg', {
+    protocol: 'https'
+  });
   var img9 = document.getElementById("img9");
   console.log(src);
   img9.setAttribute('src', src);
 
   // Placeimg Srcset
-  srcset = ips.srcset(srcsetData, 'placeimg');
+  srcset = ipsOverride.srcset(srcsetData, 'placeimg');
   var img10 = document.getElementById("img10");
   console.log(srcset);
   img10.setAttribute('src', src);
